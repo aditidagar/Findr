@@ -8,7 +8,7 @@ const PORT = 3000;
  * @param customEndpoint (optional) A custom endpoint that the object should point at when sending requests to the API
  * @param customPort (optional) Custom port number the object should point at. Defaults to 80
  */
-class Fetcher {
+class APIConnection {
 
     // need to add credentials to log-in to the backend server
     constructor(customEndpoint, customPort) {
@@ -44,6 +44,7 @@ class Fetcher {
      *          uni: String,
      *          major: String,
      *          age: Number,
+     *          image: String,
      *          password: String,
      *          chats: Array<String>
      *      }>
@@ -83,6 +84,19 @@ class Fetcher {
     /**
      * Request API for user profiles based on the ids provided. Look at 
      * @param {Array<String>} ids List of user ids
+     * @returns {Promise<
+     *      Array<{
+     *          name: String,
+     *          email: String,
+     *          gender: String,
+     *          uni: String,
+     *          major: String,
+     *          age: Number,
+     *          image: String,
+     *          password: String,
+     *          chats: Array<String>
+     *      }>
+     * >}
      */
     async fetchUsersById(ids) {
         let users = await (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/fetchUsers_id", {
@@ -96,11 +110,38 @@ class Fetcher {
         return users;
     }
 
+    /**
+     * Fetch the user profile given the email
+     * @param {String} email email of the user whose profile to fetch
+     * @returns {Promise<{
+     *          name: String,
+     *          email: String,
+     *          gender: String,
+     *          uni: String,
+     *          major: String,
+     *          age: Number,
+     *          image: String,
+     *          password: String,
+     *          chats: Array<String>
+     * }>}
+     */
     async fetchUser(email) {
         return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
         + "/fetchUsers?email=" + email)).json();
     }
 
+    /**
+     * Fetch profile cards with format that can be rendered on-screen
+     * @param {String} email User email to use as a search parameter for profile cards
+     * @returns {Promise<{
+     *      _id: String,
+     *      user_id: String,
+     *      crscodes: Array<String>,
+     *      addinfo: String,
+     *      name: String,
+     *      image: String
+     * }>}
+     */
     async loadData(email) {
 
         let profileCards = await this.fetchCards(email);
@@ -132,4 +173,4 @@ class Fetcher {
     }
 }
 
-export default Fetcher;
+export default APIConnection;
