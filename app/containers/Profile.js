@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from 'react-native';
+
 import ProfileItem from '../components/ProfileItem';
 import Icon from '../components/Icon';
 import Fetcher from '../assets/data/Fetcher';
+import ImagePicker from 'react-native-image-picker';
 
 class Profile extends React.Component {
 
@@ -23,6 +25,23 @@ class Profile extends React.Component {
   async componentDidMount() {
     let user = await this.state.fetcher.fetchUser(await AsyncStorage.getItem('storedEmail'));
     this.setState({ profile: user[0] });
+  }
+
+  testImageUpload() {
+
+    ImagePicker.showImagePicker({}, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        console.log('Uploading....');
+        this.state.fetcher.testImageUpload(response.uri);
+      }
+
+    });
   }
 
   render() {
@@ -73,7 +92,7 @@ class Profile extends React.Component {
               </Text>
             </TouchableOpacity>
   
-            <TouchableOpacity style={styles.roundedButton} onPress={()=>AsyncStorage.removeItem("storedEmail")}>
+            <TouchableOpacity style={styles.roundedButton} onPress={this.testImageUpload.bind(this)}>
               <Text style={styles.iconButton}>
                 <Icon name="chat" />
               </Text>

@@ -1,3 +1,5 @@
+import { AsyncStorage } from "react-native";
+
 const ENDPOINT = "http://10.0.2.2"; // goes to localhost from avd
 const PORT = 3000;
 
@@ -7,6 +9,24 @@ class Fetcher {
     constructor(customEndpoint, customPort) {
         this.ENDPOINT = customEndpoint ? customEndpoint : ENDPOINT;
         this.PORT = customPort ? customPort : PORT;
+    }
+
+    async uploadImage(imgUri, uploadURL) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', uploadURL);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log('Image successfully uploaded to S3');
+                } else {
+                    console.log('Error while sending the image to S3');
+                }
+            }
+        }
+
+        xhr.setRequestHeader('Content-Type', 'image/jpg');
+        xhr.send({ uri: imgUri, type: 'image/jpg'});
     }
 
     async requestSignUp(data) {
