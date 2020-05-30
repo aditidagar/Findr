@@ -38,7 +38,7 @@ class Profile extends React.Component {
         console.log('User tapped custom button: ', response.customButton);
       } else {
         console.log('Uploading....');
-        this.state.fetcher.testImageUpload(response.uri);
+        // this.state.fetcher.testImageUpload(response.uri, url);
       }
 
     });
