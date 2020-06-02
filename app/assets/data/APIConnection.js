@@ -46,7 +46,9 @@ class APIConnection {
      *          age: Number,
      *          image: String,
      *          password: String,
-     *          chats: Array<String>
+     *          chats: Array<String>,
+     *          courses: Array<String>,
+     *          bio: String
      *      }>
      * }} An object containing the status of request and a promise which resolves to user profile if request was succesful
      */
@@ -63,29 +65,13 @@ class APIConnection {
             return { success: false, user: null };
         }
         let user = await logInRes.json();
-        return { success: true, user }
+        return { success: true, user };
     }
 
     /**
      * Request the API to send profile cards based on the email provided
      * @param {String} email E-mail of the user for whom to obtain profile cards for
      * @returns {Promise<{
-     *      _id: String,
-     *      user_id: String,
-     *      crscodes: Array<String>
-     *      addinfo: String
-     * }>} List of profile cards
-     */
-    async fetchCards(email) {        
-        return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
-        + "/fetchProfileCards?email=" + email)).json();
-    }
-
-    /**
-     * Request API for user profiles based on the ids provided. Look at 
-     * @param {Array<String>} ids List of user ids
-     * @returns {Promise<
-     *      Array<{
      *          name: String,
      *          email: String,
      *          gender: String,
@@ -94,20 +80,14 @@ class APIConnection {
      *          age: Number,
      *          image: String,
      *          password: String,
-     *          chats: Array<String>
-     *      }>
-     * >}
+     *          chats: Array<String>,
+     *          courses: Array<String>,
+     *          bio: String
+     * }>} List of profile cards
      */
-    async fetchUsersById(ids) {
-        let users = await (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/fetchUsers_id", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ids })
-        })).json()
-
-        return users;
+    async fetchMatches(email) {        
+        return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
+        + "/fetchMatches?email=" + email)).json();
     }
 
     /**
@@ -122,54 +102,24 @@ class APIConnection {
      *          age: Number,
      *          image: String,
      *          password: String,
-     *          chats: Array<String>
+     *          chats: Array<String>,
+     *          courses: Array<String>,
+     *          bio: String
      * }>}
      */
     async fetchUser(email) {
-        return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
+        let users = await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
         + "/fetchUsers?email=" + email)).json();
+
+        return users[0];
     }
 
     /**
      * Fetch profile cards with format that can be rendered on-screen
      * @param {String} email User email to use as a search parameter for profile cards
-     * @returns {Promise<{
-     *      _id: String,
-     *      user_id: String,
-     *      crscodes: Array<String>,
-     *      addinfo: String,
-     *      name: String,
-     *      image: String
-     * }>}
      */
-    async loadData(email) {
-
-        let profileCards = await this.fetchCards(email);
-
-        ids = [];
-        profileCards.forEach((_card) => {
-            ids.push(_card["user_id"]);
-        });
-
-        let users = await this.fetchUsersById(ids);
-        users = this.mapUsersToHashTable(users);
-
-        profileCards.forEach((_card) => {
-            _card.name = users[_card.user_id].name;
-            _card.image = users[_card.user_id].image;
-        });
-
-        return profileCards;
-    }
-
-    mapUsersToHashTable(users) {
-        var dict = {};
-    
-        users.forEach((user) => {
-          dict[user._id] = user;
-        });
-    
-        return dict;
+    loadData(email) {
+        return this.fetchMatches(email);
     }
 }
 
