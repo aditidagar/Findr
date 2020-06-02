@@ -127,7 +127,7 @@ class LogIn extends React.Component {
                     Log in
                 </Button>
                 <View style={styles.bottomlogin}>
-                    <Button transparent='true' labelStyle={{color: "#FFF"}} style={styles.signupredirect}>
+                    <Button transparent='true' labelStyle={{color: "#FFF"}} style={styles.signupredirect} onPress={() => this.props.navigation.navigate("SignUp")}>
                         Sign Up
                     </Button>
                 </View>    

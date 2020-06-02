@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, AsyncStorage, Image } from 'react-native';
+import { View, AsyncStorage, Image, Text } from 'react-native';
 import styles from '../assets/styles';
 import { DefaultTheme, Provider as PaperProvider, TextInput, RadioButton, Dialog, Button } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
 import Swiper from 'react-native-swiper'
 import Fetcher from '../assets/data/Fetcher';
+import ImagePicker from 'react-native-image-picker';
 
 const theme = {
     colors: {
@@ -64,6 +65,23 @@ class SignUp extends React.Component {
             isMajorValid: false
         };
     }
+
+    testImageUpload() {
+
+        ImagePicker.showImagePicker({}, (response) => {
+          if (response.didCancel) {
+            console.log('User cancelled image picker');
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
+          } else {
+            console.log('Uploading....');
+            // this.state.fetcher.testImageUpload(response.uri, url);
+          }
+    
+        });
+      }
 
     handleNameChange(text) {
         if(text.length >= 3 && text.length <= 30) {
@@ -136,7 +154,6 @@ class SignUp extends React.Component {
             <View style={{backgroundColor: "#164e48", width: "100%", height: "100%", padding: '3%' }}>
                 <Image style={styles.logo} source={require('../assets/images/Findr_white2x.png')}/>
                 <Swiper
-                    style={styles.wrapper}
                     height={350}
                     onMomentumScrollEnd={(e, state, context) =>
                         console.log('index:', state.index)
@@ -211,8 +228,6 @@ class SignUp extends React.Component {
                             style={textBoxStyle}
                         />
 
-                    </View>
-                    <View style={styles.slide1}>
                         <DatePicker
                             date={this.state.date}
                             mode="date"
@@ -235,6 +250,17 @@ class SignUp extends React.Component {
                             onDateChange={(date) => {this.setState({date: date})}}
                             androidMode='spinner'
                         />
+
+                    </View>
+                    <View style={styles.slide1}>
+                        <View style={styles.signupRowContainer}>
+                            <Text style={{color: 'white', fontSize: 15, marginLeft: 2}}>
+                                Upload Profile Picture
+                            </Text>
+                            <Button mode="contained" labelStyle={{color: "#FFF"}} style={styles.pfpbutt} onPress={this.testImageUpload.bind(this)}>
+                                Select
+                            </Button>
+                        </View>
 
                         <TextInput
                             underlineColor="transparent"
@@ -265,7 +291,7 @@ class SignUp extends React.Component {
                             Sign Up
                         </Button>
                         <View style={styles.bottomsignup}>
-                            <Button transparent='true' labelStyle={{color: "#FFF"}} style={styles.signupredirect}>
+                            <Button transparent='true' labelStyle={{color: "#FFF"}} style={styles.signupredirect} onPress={() => this.props.navigation.navigate("LogIn")}>
                                 Log in
                             </Button>
                         </View>   

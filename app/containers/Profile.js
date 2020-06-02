@@ -92,7 +92,7 @@ class Profile extends React.Component {
               </Text>
             </TouchableOpacity>
   
-            <TouchableOpacity style={styles.roundedButton} onPress={this.testImageUpload.bind(this)}>
+            <TouchableOpacity style={styles.roundedButton} >
               <Text style={styles.iconButton}>
                 <Icon name="chat" />
               </Text>
@@ -104,6 +104,5 @@ class Profile extends React.Component {
     );
   }
 }
-
 
 export default Profile;
