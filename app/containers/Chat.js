@@ -5,8 +5,10 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
-  Keyboard
+  Keyboard,
+  ImageBackground,
 } from 'react-native';
+import { Header } from 'react-native-elements';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
 
@@ -118,6 +120,19 @@ export default class Chat extends Component {
 
     return (
       <View style={styles.outer}>
+        <Header
+          statusBarProps={{ barStyle: 'light-content' }}
+          barStyle='light-content' // or directly
+          centerComponent={{
+            text: 'Cassandra Johnson',
+            style: { color: '#fff' },
+          }}
+          containerStyle={{
+            backgroundColor: '#3D6DCC',
+            justifyContent: 'space-around',
+          }}
+        />
+
         <ScrollView
           ref={(ref) => {
             this.scrollView = ref;
