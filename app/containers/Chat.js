@@ -4,47 +4,19 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  KeyboardAvoidingView,
-  TextInput,
   TouchableHighlight,
-  Keyboard,
+  Keyboard
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
 
-//used to make random-sized messages
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// The actual chat view itself- a ScrollView of BubbleMessages, with an InputBar at the bottom, which moves with the keyboard
 export default class Chat extends Component {
   constructor(props) {
     super(props);
 
-    var loremIpsum =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac orci augue. Sed fringilla nec magna id hendrerit. Proin posuere, tortor ut dignissim consequat, ante nibh ultrices tellus, in facilisis nunc nibh rutrum nibh.';
-
-    //create a set number of texts with random lengths. Also randomly put them on the right (user) or left (other person).
-    var numberOfMessages = 20;
-
-    var messages = [];
-
-    for (var i = 0; i < numberOfMessages; i++) {
-      var messageLength = getRandomInt(10, 120);
-
-      var direction = getRandomInt(1, 2) === 1 ? 'right' : 'left';
-
-      message = loremIpsum.substring(0, messageLength);
-
-      messages.push({
-        direction: direction,
-        text: message,
-      });
-    }
-
     this.state = {
-      messages: messages,
+      own_email: props.navigation.state.params.own_email,
+      messages: props.navigation.state.params.messages,
       inputBarText: '',
     };
   }
@@ -132,13 +104,14 @@ export default class Chat extends Component {
 
   render() {
     var messages = [];
+    const own_email = this.state.own_email;
 
     this.state.messages.forEach(function (message, index) {
       messages.push(
         <MessageBubble
           key={index}
-          direction={message.direction}
-          text={message.text}
+          direction={message.user === own_email ? 'right' : 'left'}
+          text={message.msg}
         />
       );
     });

@@ -106,6 +106,40 @@ app.get("/fetchChatData", (req, res) => {
 
 });
 
+app.get("/fetchChats", (req, res) => {
+
+    DatabaseManager.fetchUsers({ email: req.query.email }).then(async (users) => {
+
+        const user = users[0];
+        let chat_emails = [];
+        for (let i = 0; i < user.chats.length; i++) {
+            const chat = (await DatabaseManager.fetchChat(user.chats[i]))[0];
+            chat_emails.push(chat.chat.user1 === user.email ? chat.chat.user2 : chat.chat.user1);
+        }
+
+        DatabaseManager.fetchUsers({ email: { $in: chat_emails } }).then(async (chat_users) => {
+            let chats = [];
+            for (let i = 0; i < chat_users.length; i++) {
+                const element = chat_users[i];
+                chats.push({
+                    name: element.name,
+                    email: element.email,
+                    image: await AWS_Presigner.generateSignedGetUrl("user_images/" + element.email)
+                });
+            }
+
+            res.status(200).send(chats);
+
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send("Database Fetch Error");
+        })
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).send("Database Fetch Error");
+    });
+});
+
 app.post("/updateCourses", urlEncodedParser, (req, res) => {
     DatabaseManager.fetchUsers({ email: req.body.email }).then((result) => {
         if(result.length === 0) {
