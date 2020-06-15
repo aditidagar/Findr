@@ -34,7 +34,20 @@ class APIConnection {
     }
 
     uploadPicture(url, img) {
-        
+
+        return new Promise(function(resolve, reject) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', url);
+
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState === 4) {
+                    if(xhr.status === 200) resolve(true);
+                    else reject(false);
+                }
+            };
+
+            xhr.send(img);
+        });
     }
 
     /**
