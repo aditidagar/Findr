@@ -1,5 +1,5 @@
-const ENDPOINT = "http://dev.findrapp.ca"; // goes to localhost from avd
-const PORT = 80;
+const ENDPOINT = "http://10.0.2.2"; // goes to localhost from avd
+const PORT = 3000;
 
 
 /**
@@ -125,6 +125,16 @@ class APIConnection {
         + "/fetchUsers?email=" + email)).json();
 
         return users[0];
+    }
+
+    async fetchChats(email) {
+        return (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
+        + "/fetchChats?email=" + email)).json();
+    }
+
+    async fetchChatData(from, to) {
+        return (await fetch(this.ENDPOINT + ":" + String(this.PORT)
+        + "/fetchChatData?from=" + from + "&to=" + to)).json();
     }
 
     /**

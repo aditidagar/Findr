@@ -1,18 +1,18 @@
-import React from "react";
-import { View, ImageBackground, AsyncStorage, Image } from "react-native";
-import CardStack, { Card } from "react-native-card-stack-swiper";
-import Filters from "../components/Filters";
-import CardItem from "../components/CardItem";
-import styles from "../assets/styles";
-import APIConnection from "../assets/data/APIConnection";
+import React from 'react';
+import { View, ImageBackground, AsyncStorage, Image } from 'react-native';
+import CardStack, { Card } from 'react-native-card-stack-swiper';
+import Filters from '../components/Filters';
+import CardItem from '../components/CardItem';
+import styles from '../assets/styles';
+import APIConnection from '../assets/data/APIConnection';
 // import ProfilePopup from "../components/ProfilePopup";
 
 const MAX_LENGTH = 150;
 
-class Home extends React.Component {
+class Chat extends React.Component {
   constructor(props) {
     super(props);
-    this.props.navigation.addListener("didFocus", () => this.render());
+    this.props.navigation.addListener('didFocus', () => this.render());
 
     this.state = {
       cards: [],
@@ -23,9 +23,9 @@ class Home extends React.Component {
 
   async componentWillMount() {
     try {
-      let storedEmail = await AsyncStorage.getItem("storedEmail");
+      let storedEmail = await AsyncStorage.getItem('storedEmail');
       if (storedEmail === null) {
-        this.props.navigation.navigate("LogIn");
+        this.props.navigation.navigate('LogIn');
       }
     } catch (err) {
       console.log(err);
@@ -33,7 +33,7 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
-    let storedEmail = await AsyncStorage.getItem("storedEmail");
+    let storedEmail = await AsyncStorage.getItem('storedEmail');
 
     if (storedEmail !== null && this.state.dataLoadRequired) {
       const data = await this.state.API.loadData(storedEmail);
@@ -43,13 +43,13 @@ class Home extends React.Component {
 
   async loadData() {
     const data = await this.state.API.loadData(
-      await AsyncStorage.getItem("storedEmail")
+      await AsyncStorage.getItem('storedEmail')
     );
     this.setState({ cards: data, dataLoadRequired: false });
   }
 
   render() {
-    AsyncStorage.getItem("storedEmail")
+    AsyncStorage.getItem('storedEmail')
       .then((value) => {
         if (value !== null && this.state.dataLoadRequired) {
           this.loadData();
@@ -61,12 +61,12 @@ class Home extends React.Component {
 
     return (
       <ImageBackground
-        source={require("../assets/images/15.png")}
+        source={require('../assets/images/15.png')}
         style={styles.bg}
       >
         <Image
           style={styles.homeLogo}
-          source={require("../assets/images/Findr_logo2x.png")}
+          source={require('../assets/images/Findr_logo2x.png')}
         />
         <View style={styles.containerHome}>
           <View style={styles.homeCards}>
@@ -84,7 +84,7 @@ class Home extends React.Component {
                     courses={item.courses}
                     description={
                       item.bio.length > MAX_LENGTH
-                        ? item.bio.substring(0, MAX_LENGTH) + "..."
+                        ? item.bio.substring(0, MAX_LENGTH) + '...'
                         : item.bio
                     }
                     actions
@@ -104,4 +104,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Chat;

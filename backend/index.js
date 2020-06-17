@@ -127,11 +127,57 @@ app.get("/fetchChatData", (req, res) => {
 
 });
 
+<<<<<<< HEAD
 app.post("/updateKeywords", urlEncodedParser, (req, res) => {
     let keywords = req.body.keywords;
     for (let i = 0; i < keywords.length; i++) {
         keywords[i] = String(keywords[i]).toLowerCase();
     }
+=======
+app.get("/fetchChats", (req, res) => {
+
+    DatabaseManager.fetchUsers({ email: req.query.email }).then(async (users) => {
+
+        const user = users[0];
+        let chat_emails = [];
+        for (let i = 0; i < user.chats.length; i++) {
+            const chat = (await DatabaseManager.fetchChat(user.chats[i]))[0];
+            chat_emails.push(chat.chat.user1 === user.email ? chat.chat.user2 : chat.chat.user1);
+        }
+
+        DatabaseManager.fetchUsers({ email: { $in: chat_emails } }).then(async (chat_users) => {
+            let chats = [];
+            for (let i = 0; i < chat_users.length; i++) {
+                const element = chat_users[i];
+                chats.push({
+                    name: element.name,
+                    email: element.email,
+                    image: await AWS_Presigner.generateSignedGetUrl("user_images/" + element.email)
+                });
+            }
+
+            res.status(200).send(chats);
+
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send("Database Fetch Error");
+        })
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).send("Database Fetch Error");
+    });
+});
+
+app.post("/updateCourses", urlEncodedParser, (req, res) => {
+    DatabaseManager.fetchUsers({ email: req.body.email }).then((result) => {
+        if(result.length === 0) {
+            console.log(`No user with email ${req.body.email}`);
+            res.status(404).send("404: User with email " + req.body.email + " couldn't be found");
+        }
+
+        user = result[0];
+        user.courses = req.body.updatedCourses;
+>>>>>>> chat_home
 
     DB.updateUser({ keywords }, { email: req.body.email }).then((updateRes) => {
         res.status(201).send("success");
