@@ -22,14 +22,32 @@ class APIConnection {
      * @param {Object} data Form data obtained from the user on the signup page. Assumes that all fields are valid
      */
     async requestSignUp(data) {
-        return (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/new-user", {
+        const response = (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/new-user", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
-        })).status;
+        }));
 
+        return response;
+    }
+
+    uploadPicture(url, img) {
+
+        return new Promise(function(resolve, reject) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', url);
+
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState === 4) {
+                    if(xhr.status === 200) resolve(true);
+                    else reject(false);
+                }
+            };
+
+            xhr.send(img);
+        });
     }
 
     /**
@@ -71,19 +89,10 @@ class APIConnection {
     /**
      * Request the API to send profile cards based on the email provided
      * @param {String} email E-mail of the user for whom to obtain profile cards for
-     * @returns {Promise<{
-     *          name: String,
-     *          email: String,
-     *          gender: String,
-     *          uni: String,
-     *          major: String,
-     *          age: Number,
-     *          image: String,
-     *          password: String,
-     *          chats: Array<String>,
-     *          courses: Array<String>,
-     *          bio: String
-     * }>} List of profile cards
+     * @returns {Promise<Array<{ name: String, email: String, gender: String, uni: String, major: String,
+     * age: Number, image: String, password: String, chats: Array<String>, keywords: Array<String>, bio: String }>>}
+     * 
+     * List of profile cards
      */
     async fetchMatches(email) {        
         return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
@@ -91,21 +100,25 @@ class APIConnection {
     }
 
     /**
+     * Request the API to send potential connections for the user with the email provided
+     * @param {String} email E-mail of the user for whom to obtain potential connections for
+     * @returns {Promise<Array<{ name: String, email: String, gender: String, uni: String, 
+     * major: String, age: Number, image: String, keywords: Array<String>, bio: String }>>}
+     * 
+     * List of profile cards
+     */
+    async fetchConnections(email) {
+        return await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
+        + "/fetchConnections?email=" + email)).json();
+    }
+
+    /**
      * Fetch the user profile given the email
      * @param {String} email email of the user whose profile to fetch
-     * @returns {Promise<{
-     *          name: String,
-     *          email: String,
-     *          gender: String,
-     *          uni: String,
-     *          major: String,
-     *          age: Number,
-     *          image: String,
-     *          password: String,
-     *          chats: Array<String>,
-     *          courses: Array<String>,
-     *          bio: String
-     * }>}
+     * @returns {Promise<{ name: String, email: String, gender: String, uni: String, major: String,
+     * age: Number, image: String, password: String, chats: Array<String>, keywords: Array<String>, bio: String }>}
+     * 
+     * User's profile
      */
     async fetchUser(email) {
         let users = await (await fetch(this.ENDPOINT + ":" + String(this.PORT) 
@@ -119,7 +132,7 @@ class APIConnection {
      * @param {String} email User email to use as a search parameter for profile cards
      */
     loadData(email) {
-        return this.fetchMatches(email);
+        return this.fetchConnections(email);
     }
 }
 
