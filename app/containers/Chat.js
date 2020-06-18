@@ -7,8 +7,9 @@ import {
   TouchableHighlight,
   Keyboard,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
-import { Header } from 'react-native-elements';
+import { Header, Image } from 'react-native-elements';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
 
@@ -20,6 +21,8 @@ export default class Chat extends Component {
       own_email: props.navigation.state.params.own_email,
       messages: props.navigation.state.params.messages,
       inputBarText: '',
+      other_user: props.navigation.state.params.user_name,
+      other_user_image: { uri: props.navigation.state.params.user_image },
     };
   }
 
@@ -124,7 +127,7 @@ export default class Chat extends Component {
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle='light-content' // or directly
           centerComponent={{
-            text: 'Cassandra Johnson',
+            text: this.state.other_user,
             style: { color: '#fff' },
           }}
           containerStyle={{

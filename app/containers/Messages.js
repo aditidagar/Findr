@@ -7,7 +7,7 @@ import {
   ImageBackground,
   View,
   FlatList,
-  AsyncStorage
+  AsyncStorage,
 } from 'react-native';
 import Message from '../components/Message';
 import APIConnection from '../assets/data/APIConnection';
@@ -22,15 +22,18 @@ class Messages extends React.Component {
 
   async componentDidMount() {
     let data = await this.state.API.fetchChats(
-      await AsyncStorage.getItem("storedEmail")
+      await AsyncStorage.getItem('storedEmail')
     );
 
     for (let i = 0; i < data.length; i++) {
-      data[i].messages = (await this.state.API.fetchChatData(
-        await AsyncStorage.getItem("storedEmail"), data[i].email)
-        ).messages;
+      data[i].messages = (
+        await this.state.API.fetchChatData(
+          await AsyncStorage.getItem('storedEmail'),
+          data[i].email
+        )
+      ).messages;
     }
-    
+
     this.setState({ chats: data });
   }
 
@@ -51,10 +54,14 @@ class Messages extends React.Component {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={async () => this.props.navigation.navigate('ChatPage', { 
-                    messages: item.messages,
-                    own_email: await AsyncStorage.getItem('storedEmail')
-                  })}
+                  onPress={async () =>
+                    this.props.navigation.navigate('ChatPage', {
+                      messages: item.messages,
+                      own_email: await AsyncStorage.getItem('storedEmail'),
+                      user_name: item.name,
+                      user_image: { uri: item.image },
+                    })
+                  }
                 >
                   <Message
                     image={{ uri: item.image }}
@@ -70,6 +77,5 @@ class Messages extends React.Component {
     );
   }
 }
-
 
 export default Messages;
