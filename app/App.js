@@ -13,6 +13,15 @@ import MatchesScreen from "./containers/Matches";
 import MessagesScreen from "./containers/Messages";
 import ProfileScreen from "./containers/Profile";
 import Icon from "./components/Icon";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+const Drawer = createDrawerNavigator({
+  About: MessagesScreen,
+  Invite: ProfileScreen,
+  Settings: MatchesScreen,
+
+});
 
 const App = createBottomTabNavigator(
   {

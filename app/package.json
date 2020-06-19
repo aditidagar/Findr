@@ -12,6 +12,8 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@react-navigation/drawer": "^5.8.2",
+		"@react-navigation/native": "^5.5.1",
 		"expo-linear-gradient": "^8.1.0",
 		"native-base": "^2.13.12",
 		"react": "16.6.3",
