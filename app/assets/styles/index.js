@@ -187,6 +187,52 @@ export default StyleSheet.create({
     borderRadius: 20,
   },
 
+  homePageCard: {
+    backgroundColor: WHITE,
+    borderRadius: 20,
+    maxHeight: DIMENSION_HEIGHT * 0.3,
+    maxWidth: DIMENSION_WIDTH * 0.9,
+    top: DIMENSION_HEIGHT * 0.3,
+  },
+
+  usernameHome: {
+    paddingBottom: 7,
+    marginTop: 0,
+    color: '#363636',
+    fontSize: 20,
+    alignSelf: 'center',
+    top: DIMENSION_HEIGHT * 0.05,
+
+  },
+
+  buttonText: {
+    paddingBottom: 7,
+    marginTop: 0,
+    fontSize: 20,
+    alignSelf: 'center'
+  },
+
+  match: {
+    paddingBottom: 7,
+    marginTop: 0,
+    top: DIMENSION_HEIGHT * 0.05,
+    color: '#363636',
+    fontSize: 15,
+    alignSelf: 'center'
+  },
+
+  chatButton:{
+    maxWidth: DIMENSION_WIDTH * 0.5,
+    top: DIMENSION_HEIGHT * 0.09,
+    borderBottomLeftRadius: 20,
+  },
+
+  ignoreButton:{
+    maxWidth: DIMENSION_WIDTH * 0.5,
+    left: DIMENSION_WIDTH * 0.4,
+    top: DIMENSION_HEIGHT * 0.02,
+  },
+
   // COMPONENT - CITY
   city: {
     backgroundColor: WHITE,

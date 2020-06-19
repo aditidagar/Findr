@@ -5,7 +5,7 @@ import Filters from "../components/Filters";
 import CardItem from "../components/CardItem";
 import styles from "../assets/styles";
 import APIConnection from "../assets/data/APIConnection";
-// import ProfilePopup from "../components/ProfilePopup";
+import HomePagePopup from "../components/HomePagePopup";
 
 const MAX_LENGTH = 150;
 
@@ -18,6 +18,9 @@ class Home extends React.Component {
       cards: [],
       API: new APIConnection(),
       dataLoadRequired: true,
+      isVisible: false,
+      Name: "",
+      Image: "",
     };
   }
 
@@ -88,12 +91,16 @@ class Home extends React.Component {
                         : item.bio
                     }
                     actions
-                    onPressRight={() => this.swiper.swipeRight()}
+                    onPressRight={() => (this.swiper.swipeRight(), 
+                      this.setState({isVisible: true, Name: item.name}))}
                     onPressLeft={() => this.swiper.swipeLeft()}
                   />
+                  
                 </Card>
               ))}
             </CardStack>
+            <HomePagePopup isVisible={this.state.isVisible}
+                  name={this.state.Name} />
           </View>
           <View style={styles.filterStyle}>
             <Filters />
