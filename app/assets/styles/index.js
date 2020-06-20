@@ -202,14 +202,33 @@ export default StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
     top: DIMENSION_HEIGHT * 0.05,
-
   },
 
   buttonText: {
     paddingBottom: 7,
     marginTop: 0,
     fontSize: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+
+  ignoreText:{
+    paddingBottom: 7,
+    marginTop: 0,
+    fontSize: 20,
+    alignSelf: 'center',
+    color: "red",
+  },
+
+  ignoreButtonStyle: {
+    borderBottomRightRadius: 20,
+    borderColor: "black",
+    borderWidth: 0.06,
+  },
+
+  chatButtonStyle: {
+    borderBottomLeftRadius: 20,
+    borderColor: "black",
+    borderWidth: 0.06,
   },
 
   match: {
@@ -222,15 +241,15 @@ export default StyleSheet.create({
   },
 
   chatButton:{
-    maxWidth: DIMENSION_WIDTH * 0.5,
-    top: DIMENSION_HEIGHT * 0.09,
+    maxWidth: DIMENSION_WIDTH * 0.45,
+    top: DIMENSION_HEIGHT * 0.11,
     borderBottomLeftRadius: 20,
   },
 
   ignoreButton:{
-    maxWidth: DIMENSION_WIDTH * 0.5,
-    left: DIMENSION_WIDTH * 0.4,
-    top: DIMENSION_HEIGHT * 0.02,
+    maxWidth: DIMENSION_WIDTH * 0.45,
+    left: DIMENSION_WIDTH * 0.45,
+    top: DIMENSION_HEIGHT * 0.04,
   },
 
   // COMPONENT - CITY

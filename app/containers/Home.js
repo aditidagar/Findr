@@ -20,7 +20,7 @@ class Home extends React.Component {
       dataLoadRequired: true,
       isVisible: false,
       Name: "",
-      Image: "",
+      Picture: "",
     };
   }
 
@@ -92,7 +92,7 @@ class Home extends React.Component {
                     }
                     actions
                     onPressRight={() => (this.swiper.swipeRight(), 
-                      this.setState({isVisible: true, Name: item.name}))}
+                      this.setState({isVisible: true, Name: item.name, Picture: {uri: item.image }}))}
                     onPressLeft={() => this.swiper.swipeLeft()}
                   />
                   
@@ -100,7 +100,7 @@ class Home extends React.Component {
               ))}
             </CardStack>
             <HomePagePopup isVisible={this.state.isVisible}
-                  name={this.state.Name} />
+                  name={this.state.Name}/>
           </View>
           <View style={styles.filterStyle}>
             <Filters />

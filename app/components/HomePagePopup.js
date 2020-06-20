@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import styles from "../assets/styles";
 import {BlurView} from '@react-native-community/blur';
 import {Button} from 'react-native-elements';
+import {Overlay} from 'react-native-elements';
 
 const nameStyle = [
     {
@@ -21,7 +22,7 @@ class HomePagePopup extends React.Component {
         this.state = { 
             isVisible: props.isVisible,
             Name: props.name,
-            Image: props.Image};
+            Picture: props.Image};
     }
 
     componentWillReceiveProps(props){
@@ -31,29 +32,41 @@ class HomePagePopup extends React.Component {
         if (this.state.Name !== props.name){
             this.setState({Name: props.name})
         }
-        if (this.state.Image !== props.Image){
-            this.setState({Image: props.Image})
+        if (this.state.Picture !== props.picture){
+            this.setState({Picture: props.picture})
         }
     }
 
     render() {
-
+        console.log(this.state.Picture)
         return (
             <Modal 
             visible={this.state.isVisible} 
             onBackdropPress={() => this.setState({ isVisible: false })}
             style={styles.homePageCard}
+            transparent={true}
+            animationType={"fade"}
             >
-                <Text style={styles.usernameHome}>{this.state.Name}</Text>
-                <Text style={styles.match}>It's a Match!</Text>
-
-                <View style={styles.chatButton}>
-                    <Button title="Chat" type="clear" titleStyle={styles.buttonText}/>
+                {/* <BlurView 
+                blurType="xlight"
+                style={{backgroundColor: "white"}}
+                > */}
+                <View>
+                    <Text style={styles.usernameHome}>{this.state.Name}</Text>
+                    <Text style={styles.match}>It's a Match!</Text>
+                    <View style={styles.chatButton}>
+                        <Button title="Chat" type="outline" titleStyle={styles.buttonText}
+                        buttonStyle={styles.chatButtonStyle}
+                        />
+                    </View>
+                    <View style={styles.ignoreButton}>
+                        <Button title="Ignore" type="outline" titleStyle={styles.ignoreText}
+                        buttonStyle={styles.ignoreButtonStyle}/>
+                    </View>
                 </View>
-                <View style={styles.ignoreButton}>
-                    <Button title="Ignore" type="clear" titleStyle={styles.buttonText}/>
-                </View>
-                {/* <Button title="Ignore"/> */}
+                <Overlay isVisible={true} onBackdropPress={()=> this.setState({isVisible: false})}>
+                {/* </BlurView> */}
+                </Overlay>
             </Modal>
         );
     }
