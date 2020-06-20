@@ -9,10 +9,13 @@ import {
   Image,
   Dimensions,
   AsyncStorage,
+  Animated,
 } from "react-native";
 import ProfileItem from "../components/ProfileItem";
 import Icon from "../components/Icon";
 import APIConnection from "../assets/data/APIConnection";
+import Menu from "../components/Menu";
+import Interactable from 'react-native-interactable'
 
 const PRIMARY_COLOR = "#7444C0";
 const SECONDARY_COLOR = "#5636B8";
@@ -37,7 +40,13 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { API: new APIConnection(), profile: null };
+    this.state = { 
+      API: new APIConnection(), 
+      profile: null,
+      deltaX: new Animated.Value(-300),
+      menuOpened: false
+    };
+    this.deltaX = new Animated.Value(0)
   }
 
   async componentDidMount() {
@@ -57,42 +66,86 @@ class Profile extends React.Component {
     const email = this.state.profile ? this.state.profile.email : "";
 
     return (
-      <View style={styles.headerBackground}>
-        <Image
-          source={require("../assets/images/Findr_logo2x.png")}
-          style={globalStyles.profileLogo}
-        />
-        <View style={styles.header}>
-          <View style={styles.profilepicWrap}>
-            <Image style={styles.profilepic} source={image} />
+      <View>
+        <Menu />
+        <Interactable.View
+          style={{ flex: 1}}
+          ref='menuInstance'
+          horizontalOnly={true}
+          snapPoints={[{x: 0, damping: 0.6}, {x: 300, damping: 0.6}] }
+          boundaries={{right: 300}}
+          initialPosition={{x: 0}}
+          animatedValueX={this.deltaX}
+          onSnap={ this.onStopInteraction.bind(this) }
+        >
+          <View style={styles.headerBackground}>
+            <View style={styles.profiletop}>
+              <Image
+                source={require("../assets/images/Findr_logo2x.png")}
+                style={globalStyles.profileLogo}
+              />
+              <TouchableOpacity>
+                <Image
+                  source={require("../assets/images/menu.png")}
+                  style={{marginLeft: DIMENSION_WIDTH * 0.1, height: 70}}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.header}>
+              <View style={styles.profilepicWrap}>
+                <Image style={styles.profilepic} source={image} />
+              </View>
+            </View>
+
+            <View>
+              <ProfileItem
+                name={name}
+                age={age}
+                location={location}
+                info1={gender == "M" ? "Male" : "Female"}
+                info2={major}
+                info3={email}
+              />
+            </View>
+
+            <View style={styles.actionsProfile}>
+              <TouchableOpacity style={styles.roundedButton}>
+                <Text style={styles.iconButton}>
+                  <Icon name="optionsH" />
+                </Text>
+                <Text style={styles.textButton}> Update Profile</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-
-        <View>
-          <ProfileItem
-            name={name}
-            age={age}
-            location={location}
-            info1={gender == "M" ? "Male" : "Female"}
-            info2={major}
-            info3={email}
-          />
-        </View>
-
-        <View style={styles.actionsProfile}>
-          <TouchableOpacity style={styles.roundedButton}>
-            <Text style={styles.iconButton}>
-              <Icon name="optionsH" />
-            </Text>
-            <Text style={styles.textButton}> Update Profile</Text>
-          </TouchableOpacity>
-        </View>
+        </Interactable.View>
       </View>
-    );
+    )
+  }
+  onStopInteraction(event, check) {
+    let menuOpened = true
+    if(event.nativeEvent.index == 0) {
+        menuOpened = false
+    }
+    this.setState((preState, props) => {
+        return { menuOpened }
+    })
+  }
+
+  onMenuPress = () => {
+      const menuOpened = !this.state.menuOpened
+      if(menuOpened) {
+          this.refs['menuInstance'].snapTo({index: 1})
+      } else {
+          this.refs['menuInstance'].snapTo({index: 0})
+      }
   }
 }
 
 const styles = StyleSheet.create({
+  profiletop: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   headerBackground: {
     flex: 1,
     width: DIMENSION_WIDTH,

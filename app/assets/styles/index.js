@@ -306,6 +306,7 @@ export default StyleSheet.create({
     height: 60,
     alignSelf: "center",
     marginTop: DIMENSION_HEIGHT * 0.06,
+    marginLeft: DIMENSION_WIDTH * 0.44
   },
 
   // CONTAINER - GENERAL
@@ -543,26 +544,26 @@ export default StyleSheet.create({
   },
 
   //COMPONENT - SIDE MENU
-  sidemenucontainer: {
-    paddingTop: 20,
-    flex: 1,
+  sideMenu: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: 300,
+    backgroundColor: 'transparent'
   },
-
-  navItemStyle: {
-    padding: 10,
+  sideMenuTitle: {
+      marginLeft: 20,
+      marginBottom: 30
   },
-
-  navSectionStyle: {
-    backgroundColor: "lightgrey",
+  menu: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      paddingVertical: 10
   },
-
-  sectionHeadingStyle: {
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
-
-  footerContainer: {
-    padding: 20,
-    backgroundColor: "lightgrey",
+  menuText: {
+      marginLeft: 20
   },
 });
