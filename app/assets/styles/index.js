@@ -24,9 +24,9 @@ const DIMENSION_HEIGHT = Dimensions.get("window").height;
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
   containerCardItem: {
-    width: DIMENSION_WIDTH * 0.8,
+    width: DIMENSION_WIDTH * 0.85,
     marginTop: DIMENSION_HEIGHT * 0.11,
-    marginLeft: DIMENSION_WIDTH * 0.04,
+    marginLeft: DIMENSION_WIDTH * 0.02,
     backgroundColor: WHITE,
     borderRadius: 40,
     shadowOpacity: 0.3,
@@ -473,28 +473,39 @@ export default StyleSheet.create({
 
   //COMPONENT - SIGNUP
   logo: {
-    marginLeft: "40%",
-    marginTop: 70,
-    width: 100,
-    height: 100,
+    alignSelf: "center",
+    marginTop: DIMENSION_HEIGHT * 0.1,
+    marginLeft: DIMENSION_WIDTH * 0.05,
+    width: DIMENSION_WIDTH * 0.35,
+    height: DIMENSION_HEIGHT * 0.15,
   },
 
-  slide: {
-    marginTop: 40,
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "transparent",
+  slide0: {
+    marginTop: DIMENSION_HEIGHT * 0.1
   },
 
   slide1: {
-    marginTop: 60,
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "transparent",
+    marginTop: DIMENSION_HEIGHT * 0.1
   },
 
-  wrapper: {
-    // marginTop: 80
+  uniDropDown: {
+    marginTop: DIMENSION_HEIGHT * 0.02,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: DIMENSION_HEIGHT * 0.06,
+    width: DIMENSION_WIDTH * 0.7,
+    marginBottom: DIMENSION_HEIGHT * 0.05,
+    alignSelf: 'center',
+    borderColor: WHITE,
+    padding: 5
+  },
+
+  uniList: {
+    bottom: DIMENSION_HEIGHT * 0.3, 
+    left: DIMENSION_WIDTH * 0.09,
+    width: DIMENSION_WIDTH * 0.7,
   },
 
   signupbutt: {
@@ -504,10 +515,10 @@ export default StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    marginTop: 40,
-    width: 150,
-    marginLeft: 110,
-    height: 40,
+    marginTop: DIMENSION_HEIGHT * 0.05,
+    marginBottom: DIMENSION_HEIGHT * 0.05,
+    width: DIMENSION_WIDTH * 0.35,
+    alignSelf: 'center',
   },
 
   bottomsignup: {
@@ -516,26 +527,39 @@ export default StyleSheet.create({
 
   //COMPONENT - LOGIN
   loginlogo: {
-    marginBottom: 80,
-    marginLeft: 150,
-    marginTop: 100,
-    width: 105,
-    height: 40,
+    alignSelf: "center",
+    marginTop: DIMENSION_HEIGHT * 0.1,
+    marginLeft: DIMENSION_WIDTH * 0.05,
+    marginBottom: DIMENSION_HEIGHT * 0.13,
+    width: DIMENSION_WIDTH * 0.35,
+    height: DIMENSION_HEIGHT * 0.15,
   },
 
   loginbutt: {
     backgroundColor: "#013d38",
     borderRadius: 10,
-    marginTop: 40,
-    width: 150,
-    marginLeft: 110,
+    marginTop: DIMENSION_HEIGHT * 0.05,
+    width: DIMENSION_WIDTH * 0.35,
+    alignSelf: 'center',
+    elevation: 4
   },
 
   signupredirect: {
-    marginTop: 100,
-    marginLeft: 110,
-    width: 150,
+    width: DIMENSION_WIDTH * 0.35,
+    alignSelf: 'center',
     borderRadius: 10,
+    borderColor: WHITE,
+    justifyContent: 'flex-end',
+    marginTop: DIMENSION_HEIGHT * 0.225,
+    bottom: DIMENSION_HEIGHT * 0.025,
+  },
+
+  loginRedirect: {
+    width: DIMENSION_WIDTH * 0.35,
+    alignSelf: 'center',
+    borderRadius: 10,
+    borderColor: WHITE,
+    marginTop: DIMENSION_HEIGHT * 0.085
   },
 
   bottomlogin: {

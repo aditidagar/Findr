@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Dimensions, Platform } from "react-native";
+import { Text, Dimensions, Platform, Image } from "react-native";
 import {
   createBottomTabNavigator,
   createAppContainer,
@@ -14,13 +14,18 @@ import MessagesScreen from "./containers/Messages";
 import ProfileScreen from "./containers/Profile";
 import Icon from "./components/Icon";
 
+
 const App = createBottomTabNavigator(
   {
     Explore: {
       screen: HomeScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
-          const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const UNFOCUSED_HOME_ICON = require('./assets/images/home_icon.png');
+		  const FOCUSED_HOME_ICON = require('./assets/images/home_g.png');
+		  let icon = focused ? FOCUSED_HOME_ICON : UNFOCUSED_HOME_ICON;
+
           return (
             <Text
               style={[
@@ -28,7 +33,9 @@ const App = createBottomTabNavigator(
                 { color: iconFocused, marginTop: "15%" },
               ]}
             >
-              <Icon name="explore" />
+            
+			<Image source={icon}/>
+
             </Text>
           );
         },
@@ -38,7 +45,11 @@ const App = createBottomTabNavigator(
       screen: MatchesScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
-          const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const UNFOCUSED_MATCHES_ICON = require('./assets/images/search.png')
+		  const FOCUSED_MATCHES_ICON = require('./assets/images/search_g.png')
+		  let icon = focused ? FOCUSED_MATCHES_ICON : UNFOCUSED_MATCHES_ICON
+
           return (
             <Text
               style={[
@@ -46,7 +57,7 @@ const App = createBottomTabNavigator(
                 { color: iconFocused, marginTop: "15%" },
               ]}
             >
-              <Icon name="heart" />
+			  <Image source={icon}/>
             </Text>
           );
         },
@@ -56,7 +67,11 @@ const App = createBottomTabNavigator(
       screen: MessagesScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
-          const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const UNFOCUSED_MESSAGE_ICON = require('./assets/images/message.png')
+		  const FOCUSED_MESSAGE_ICON = require('./assets/images/message_g.png')
+		  let icon = focused ? FOCUSED_MESSAGE_ICON : UNFOCUSED_MESSAGE_ICON
+
           return (
             <Text
               style={[
@@ -64,7 +79,7 @@ const App = createBottomTabNavigator(
                 { color: iconFocused, marginTop: "15%" },
               ]}
             >
-              <Icon name="chat" />
+			  <Image source={icon}/>
             </Text>
           );
         },
@@ -74,7 +89,11 @@ const App = createBottomTabNavigator(
       screen: ProfileScreen,
       navigationOptions: {
         tabBarIcon: ({ focused }) => {
-          const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const iconFocused = focused ? "#2c9c91" : "#4a4949";
+		  const UNFOCUSED_PROFILE_ICON = require('./assets/images/person.png')
+		  const FOCUSED_PROFILE = require('./assets/images/person_g.png')
+		  let icon = focused ? FOCUSED_PROFILE : UNFOCUSED_PROFILE_ICON
+
           return (
             <Text
               style={[
@@ -82,7 +101,8 @@ const App = createBottomTabNavigator(
                 { color: iconFocused, marginTop: "15%" },
               ]}
             >
-              <Icon name="user" />
+			  <Image source={icon}/>
+
             </Text>
           );
         },
