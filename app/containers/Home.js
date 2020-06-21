@@ -95,9 +95,9 @@ class Home extends React.Component {
               ))}
             </CardStack>
           </View>
-          <View style={styles.filterStyle}>
+          {/* <View style={styles.filterStyle}>
             <Filters />
-          </View>
+          </View> */}
         </View>
       </ImageBackground>
     );
