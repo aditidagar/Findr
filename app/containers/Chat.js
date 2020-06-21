@@ -131,7 +131,7 @@ export default class Chat extends Component {
             style: { color: '#fff' },
           }}
           containerStyle={{
-            backgroundColor: '#3D6DCC',
+            backgroundColor: '#008080',
             justifyContent: 'space-around',
           }}
         />
