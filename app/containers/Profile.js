@@ -9,10 +9,12 @@ import {
   Image,
   Dimensions,
   AsyncStorage,
+  ImageBackground,
 } from "react-native";
 import ProfileItem from "../components/ProfileItem";
 import Icon from "../components/Icon";
 import APIConnection from "../assets/data/APIConnection";
+import { ScrollView } from "react-navigation";
 
 const PRIMARY_COLOR = "#7444C0";
 const SECONDARY_COLOR = "#5636B8";
@@ -57,37 +59,66 @@ class Profile extends React.Component {
     const email = this.state.profile ? this.state.profile.email : "";
 
     return (
-      <View style={styles.headerBackground}>
-        <Image
-          source={require("../assets/images/Findr_logo2x.png")}
-          style={globalStyles.profileLogo}
-        />
-        <View style={styles.header}>
-          <View style={styles.profilepicWrap}>
-            <Image style={styles.profilepic} source={image} />
-          </View>
-        </View>
+      <ImageBackground
+      source={require("../assets/images/Home.png")}
+      style={styles.bg}
+      >
+        <View style={styles.profileContainer}>
+          <ScrollView>
+            <Image
+              source={require("../assets/images/Findr_logo2x.png")}
+              style={globalStyles.profileLogo}
+            />
+            <View style={styles.header}>
+              <View style={styles.profilepicWrap}>
+                <Image style={styles.profilepic} source={image} />
+              </View>
+            </View>
 
-        <View>
-          <ProfileItem
-            name={name}
-            age={age}
-            location={location}
-            info1={gender == "M" ? "Male" : "Female"}
-            info2={major}
-            info3={email}
-          />
-        </View>
+            <View style={{paddingHorizontal: 10}}>
+              <View style={{marginTop: DIMENSION_HEIGHT * 0.19}}>
+                <ProfileItem
+                  name={name}
+                  age={age}
+                  location={location}
+                  info1={gender == "M" ? "Male" : "Female"}
+                  info2={major}
+                  info3={email}
+                />
+              </View>
+              <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
+                <ProfileItem
+                  // name={name}
+                  // age={age}
+                  // location={location}
+                  info1={gender == "M" ? "Male" : "Female"}
+                  info2={major}
+                  info3={email}
+                />
+              </View>
+              <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
+                <ProfileItem
+                  // name={name}
+                  // age={age}
+                  // location={location}
+                  info1={gender == "M" ? "Male" : "Female"}
+                  info2={major}
+                  info3={email}
+                />
+              </View>
+            </View>
 
-        <View style={styles.actionsProfile}>
-          <TouchableOpacity style={styles.roundedButton}>
-            <Text style={styles.iconButton}>
-              <Icon name="optionsH" />
-            </Text>
-            <Text style={styles.textButton}> Update Profile</Text>
-          </TouchableOpacity>
+            {/* <View style={styles.actionsProfile}>
+              <TouchableOpacity style={styles.roundedButton}>
+                <Text style={styles.iconButton}>
+                  <Icon name="optionsH" />
+                </Text>
+                <Text style={styles.textButton}> Update Profile</Text>
+              </TouchableOpacity>
+            </View> */}
+          </ScrollView>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -104,25 +135,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    // padding: 20,
     // backgroundColor: 'rgba(26, 93, 87, 0.15)',
   },
   profilepicWrap: {
-    width: 240,
-    height: 240,
-    borderRadius: 100,
-    borderColor: "rgba(26, 93, 87, 0.15)",
+    width: DIMENSION_WIDTH,
+    height: 350,
+    // borderRadius: 100,
+    // borderColor: "rgba(26, 93, 87, 0.15)",
     // borderWidth: 16,
-    marginBottom: 160,
+    // marginBottom: 160,
     elevation: 10,
   },
   profilepic: {
     flex: 1,
     width: null,
     alignSelf: "stretch",
-    borderRadius: 100,
-    borderColor: "#fff",
-    borderWidth: 4,
+    // borderRadius: 100,
+    // borderColor: "#fff",
+    // borderWidth: 4,
   },
   containerProfile: { marginHorizontal: 0 },
   photo: {
@@ -188,7 +219,17 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     fontStyle: "italic",
   },
-  homeicon: {},
+  profileContainer: {
+    justifyContent: "space-between",
+    flex: 1,
+    // paddingHorizontal: 10,
+  },
+  bg: {
+    flex: 1,
+    resizeMode: "cover",
+    width: DIMENSION_WIDTH,
+    height: DIMENSION_HEIGHT,
+  }
 });
 
 export default Profile;

@@ -17,6 +17,8 @@ const Icon = ({ name }) => {
     chat: "&#xf4ac;",
     explore: "&#xf50d;",
     arrow: "&#x3e;",
+    pencil: "&#xe014",
+
   };
 
   let icon = iconsList[name];
