@@ -1,15 +1,101 @@
-import React from 'react';
-import globalStyles from '../assets/styles';
-
+import React, { Component } from 'react';
 import {
-  View,
   Text,
-  TouchableOpacity,
+  View,
   StyleSheet,
-  Image,
+  ScrollView,
+  TouchableHighlight,
+  Keyboard,
+  ImageBackground,
+  TouchableOpacity,
   Dimensions,
-  AsyncStorage,
 } from 'react-native';
+import { Header, Image } from 'react-native-elements';
+import { TextInput, DefaultTheme } from 'react-native-paper';
+
+const theme = {
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'transparent',
+    text: 'white',
+    placeholder: 'lightgrey',
+    labelColor: 'black',
+  },
+};
+
+const textBoxStyle = {
+  width: '75%',
+  height: 50,
+  borderBottomLeftRadius: 30,
+  borderBottomRightRadius: 30,
+  borderTopLeftRadius: 30,
+  borderTopRightRadius: 30,
+  alignSelf: 'center',
+  backgroundColor: '#5EA39D',
+  opacity: 0.5,
+  marginBottom: '8%',
+};
+
+class UpdateProfile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: props.navigation.state.params.user_name,
+      age: props.navigation.state.params.user_age,
+      major: props.navigation.state.params.user_major,
+    };
+  }
+  render() {
+    return (
+      <View>
+        <Header
+          statusBarProps={{ barStyle: 'light-content' }}
+          barStyle='light-content' // or directly
+          centerComponent={{
+            text: 'Update Profile',
+            style: { color: '#fff' },
+          }}
+          containerStyle={{
+            backgroundColor: '#008080',
+            justifyContent: 'space-around',
+          }}
+        />
+        <TextInput
+          underlineColor='transparent'
+          mode={'flat'}
+          value={this.state.name}
+          label='Enter Name'
+          placeholder={this.state.name}
+          theme={theme}
+        />
+        <TextInput
+          underlineColor='transparent'
+          mode={'flat'}
+          value={this.state.age}
+          label='Enter Age'
+          placeholder={this.state.age}
+          theme={theme}
+        />
+        <TextInput
+          underlineColor='transparent'
+          mode={'flat'}
+          value={this.state.major}
+          label='Enter Major'
+          placeholder={this.state.major}
+          theme={theme}
+        />
+        <TouchableOpacity style={styles.roundedButton}>
+          <Text style={styles.textButton}> Update Profile</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+const ICON_FONT = 'tinderclone';
+const DIMENSION_WIDTH = Dimensions.get('window').width;
+const DIMENSION_HEIGHT = Dimensions.get('window').height;
+
 import ProfileItem from '../components/ProfileItem';
 import Icon from '../components/Icon';
 import APIConnection from '../assets/data/APIConnection';
@@ -29,78 +115,7 @@ const LIKE_ACTIONS = '#2c9c91';
 const DISLIKE_ACTIONS = '#363636';
 const FLASH_ACTIONS = '#5028D7';
 
-const ICON_FONT = 'tinderclone';
-
-const DIMENSION_WIDTH = Dimensions.get('window').width;
-const DIMENSION_HEIGHT = Dimensions.get('window').height;
-
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { API: new APIConnection(), profile: null };
-  }
-
-  async componentDidMount() {
-    let user = await this.state.API.fetchUser(
-      await AsyncStorage.getItem('storedEmail')
-    );
-    this.setState({ profile: user });
-  }
-
-  render() {
-    const image = this.state.profile ? { uri: this.state.profile.image } : null;
-    const name = this.state.profile ? this.state.profile.name : '';
-    const age = this.state.profile ? this.state.profile.age : -1;
-    const location = this.state.profile ? this.state.profile.uni : '';
-    const gender = this.state.profile ? this.state.profile.gender : '';
-    const major = this.state.profile ? this.state.profile.major : '';
-    const email = this.state.profile ? this.state.profile.email : '';
-
-    return (
-      <View style={styles.headerBackground}>
-        <Image
-          source={require('../assets/images/Findr_logo2x.png')}
-          style={globalStyles.profileLogo}
-        />
-        <View style={styles.header}>
-          <View style={styles.profilepicWrap}>
-            <Image style={styles.profilepic} source={image} />
-          </View>
-        </View>
-
-        <View>
-          <ProfileItem
-            name={name}
-            age={age}
-            location={location}
-            info1={gender == 'M' ? 'Male' : 'Female'}
-            info2={major}
-            info3={email}
-          />
-        </View>
-
-        <View style={styles.actionsProfile}>
-          <TouchableOpacity
-            style={styles.roundedButton}
-            onPress={async () =>
-              this.props.navigation.navigate('ProfileUpdate', {
-                user_name: name,
-                user_age: age,
-                user_gender: gender,
-                user_major: major,
-              })
-            }
-          >
-            <Text style={styles.iconButton}>
-              <Icon name='optionsH' />
-            </Text>
-            <Text style={styles.textButton}> Update Profile</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-}
+//Custom Styles
 
 const styles = StyleSheet.create({
   headerBackground: {
@@ -200,5 +215,4 @@ const styles = StyleSheet.create({
   },
   homeicon: {},
 });
-
-export default Profile;
+export default UpdateProfile;

@@ -225,9 +225,8 @@ class InputBar extends Component {
   }
 }
 
-//TODO: separate these out. This is what happens when you're in a hurry!
 const styles = StyleSheet.create({
-  //ChatView
+
 
   outer: {
     flex: 1,

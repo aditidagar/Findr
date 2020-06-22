@@ -14,6 +14,7 @@ import MessagesPage from './containers/Messages';
 import ProfileScreen from './containers/Profile';
 import Icon from './components/Icon';
 import Chat from './containers/Chat';
+import UpdateProfile from './containers/UpdateProfile';
 
 const App = createBottomTabNavigator(
   {
@@ -133,6 +134,9 @@ const RootStack = createStackNavigator(
     },
     ChatPage: {
       screen: Chat,
+    },
+    ProfileUpdate: {
+      screen: UpdateProfile,
     },
   },
   { mode: 'modal', headerMode: 'none' }
