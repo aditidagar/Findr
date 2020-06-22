@@ -8,11 +8,25 @@ import {
   Keyboard,
   ImageBackground,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { Header, Image } from 'react-native-elements';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
+import Icon from '../components/Icon';
 
+const DIMENSION_WIDTH = Dimensions.get('window').width;
+const DIMENSION_HEIGHT = Dimensions.get('window').height;
+const ICON_FONT = 'tinderclone';
+
+const renderCustomHeader = () => {
+  return (
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={require('../assets/images/Findr_logo2x.png')}
+    />
+  );
+};
 export default class Chat extends Component {
   constructor(props) {
     super(props);
@@ -123,34 +137,46 @@ export default class Chat extends Component {
 
     return (
       <View style={styles.outer}>
-        <Header
-          statusBarProps={{ barStyle: 'light-content' }}
-          barStyle='light-content' // or directly
-          centerComponent={{
-            text: this.state.other_user,
-            style: { color: '#fff' },
-          }}
-          containerStyle={{
-            backgroundColor: '#008080',
-            justifyContent: 'space-around',
-          }}
-        />
-
-        <ScrollView
-          ref={(ref) => {
-            this.scrollView = ref;
-          }}
-          style={styles.messages}
+        <ImageBackground
+          source={require('../assets/images/Home.png')}
+          style={styles.bg}
         >
-          {messages}
-        </ScrollView>
-        <InputBar
-          onSendPressed={() => this._sendMessage()}
-          onSizeChange={() => this._onInputSizeChange()}
-          onChangeText={(text) => this._onChangeInputBarText(text)}
-          text={this.state.inputBarText}
-        />
-        <KeyboardSpacer />
+          <Header
+            statusBarProps={{ barStyle: 'light-content' }}
+            barStyle='light-content' // or directly
+            centerComponent={() => {
+              return (
+                <View>
+                  {/* <Image
+                    style={styles.profilepic}
+                    source={require('../assets/images/Findr_logo2x.png')}
+                  /> */}
+                  <Text style={styles.headerTest}>{this.state.other_user}</Text>
+                </View>
+              );
+            }}
+            containerStyle={{
+              backgroundColor: '#008080',
+              justifyContent: 'space-around',
+            }}
+          />
+
+          <ScrollView
+            ref={(ref) => {
+              this.scrollView = ref;
+            }}
+            style={styles.messages}
+          >
+            {messages}
+          </ScrollView>
+          <InputBar
+            onSendPressed={() => this._sendMessage()}
+            onSizeChange={() => this._onInputSizeChange()}
+            onChangeText={(text) => this._onChangeInputBarText(text)}
+            text={this.state.inputBarText}
+          />
+          <KeyboardSpacer />
+        </ImageBackground>
       </View>
     );
   }
@@ -218,7 +244,9 @@ class InputBar extends Component {
           style={styles.sendButton}
           onPress={() => this.props.onSendPressed()}
         >
-          <Text style={{ color: 'white' }}>Send</Text>
+          <Text style={styles.iconButton}>
+            <Icon name='arrow' />
+          </Text>
         </TouchableHighlight>
       </View>
     );
@@ -233,7 +261,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
   },
 
   messages: {
@@ -265,7 +292,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     paddingRight: 15,
     borderRadius: 5,
-    backgroundColor: '#66db30',
+    backgroundColor: '#1a5d57',
   },
 
   //MessageBubble
@@ -290,10 +317,25 @@ const styles = StyleSheet.create({
   },
 
   messageBubbleRight: {
-    backgroundColor: '#66db30',
+    backgroundColor: '#1a5d57',
   },
 
   messageBubbleTextRight: {
     color: 'white',
+  },
+  bg: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: DIMENSION_WIDTH,
+    height: DIMENSION_HEIGHT,
+  },
+  iconButton: { fontFamily: ICON_FONT, fontSize: 20, color: '#ffff' },
+  headerTest: {
+    color: '#ffff',
+  },
+  profilepic: {
+    flex: 1,
+    width: 25,
+    height: 25,
   },
 });
