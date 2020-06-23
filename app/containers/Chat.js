@@ -14,6 +14,7 @@ import { Header, Image } from 'react-native-elements';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
 import Icon from '../components/Icon';
+import { moderateScale } from 'react-native-size-matters';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -147,10 +148,6 @@ export default class Chat extends Component {
             centerComponent={() => {
               return (
                 <View>
-                  {/* <Image
-                    style={styles.profilepic}
-                    source={require('../assets/images/Findr_logo2x.png')}
-                  /> */}
                   <Text style={styles.headerTest}>{this.state.other_user}</Text>
                 </View>
               );
@@ -187,9 +184,9 @@ class MessageBubble extends Component {
   render() {
     //These spacers make the message bubble stay to the left or the right, depending on who is speaking, even if the message is multiple lines.
     var rightSpacer =
-      this.props.direction === 'left' ? null : <View style={{ width: 120 }} />;
+      this.props.direction === 'left' ? null : <View style={{ width: 160 }} />;
     var leftSpacer =
-      this.props.direction === 'left' ? <View style={{ width: 120 }} /> : null;
+      this.props.direction === 'left' ? <View style={{ width: 160 }} /> : null;
 
     var bubbleStyles =
       this.props.direction === 'left'
@@ -200,6 +197,17 @@ class MessageBubble extends Component {
       this.props.direction === 'left'
         ? styles.messageBubbleTextLeft
         : styles.messageBubbleTextRight;
+
+    var arrowDirection =
+      this.props.direction == 'left'
+        ? styles.arrowLeftContainer
+        : styles.arrowRightContainer;
+
+    var arrowIcon =
+      this.props.direction == 'left' ? styles.arrowLeft : styles.arrowRight;
+
+    var messageDirection =
+      this.props.direction == 'left' ? styles.itemOut : styles.itemIn;
 
     return (
       <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
@@ -298,14 +306,16 @@ const styles = StyleSheet.create({
   //MessageBubble
 
   messageBubble: {
-    borderRadius: 5,
-    marginTop: 8,
-    marginRight: 10,
-    marginLeft: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    maxWidth: moderateScale(250, 2),
+    paddingHorizontal: moderateScale(10, 2),
+    paddingTop: moderateScale(5, 2),
+    paddingBottom: moderateScale(7, 2),
+    borderRadius: 20,
+    marginBottom: 10,
+    marginTop: 5,
     flexDirection: 'row',
     flex: 1,
+    marginLeft: 10,
   },
 
   messageBubbleLeft: {
@@ -337,5 +347,42 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 25,
     height: 25,
+  },
+  arrowContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+    flex: 1,
+  },
+  arrowLeftContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+  },
+
+  arrowRightContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+
+  arrowLeft: {
+    left: moderateScale(-6, 0.5),
+  },
+
+  arrowRight: {
+    right: moderateScale(-6, 0.5),
+  },
+  item: {
+    marginVertical: moderateScale(7, 2),
+    flexDirection: 'row',
+  },
+  itemIn: {
+    marginLeft: 20,
+  },
+  itemOut: {
+    alignSelf: 'flex-end',
+    marginRight: 20,
   },
 });

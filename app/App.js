@@ -14,6 +14,7 @@ import MessagesPage from './containers/Messages';
 import ProfileScreen from './containers/Profile';
 import Icon from './components/Icon';
 import Chat from './containers/Chat';
+import { moderateScale } from 'react-native-size-matters';
 
 const App = createBottomTabNavigator(
   {
