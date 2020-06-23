@@ -60,7 +60,7 @@ class Profile extends React.Component {
 
     return (
       <ImageBackground
-      source={require("../assets/images/Home.png")}
+      source={require("../assets/images/15.png")}
       style={styles.bg}
       >
         <View style={styles.profileContainer}>
@@ -76,7 +76,7 @@ class Profile extends React.Component {
             </View>
 
             <View style={{paddingHorizontal: 10}}>
-              <View style={{marginTop: DIMENSION_HEIGHT * 0.19}}>
+              <View style={{marginTop: DIMENSION_HEIGHT * 0.21}}>
                 <ProfileItem
                   name={name}
                   age={age}
@@ -96,7 +96,7 @@ class Profile extends React.Component {
                   info3={email}
                 />
               </View>
-              <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
+              <View style={{marginTop: DIMENSION_HEIGHT * 0.18, marginBottom: DIMENSION_HEIGHT * 0.02}}>
                 <ProfileItem
                   // name={name}
                   // age={age}
@@ -107,15 +107,6 @@ class Profile extends React.Component {
                 />
               </View>
             </View>
-
-            {/* <View style={styles.actionsProfile}>
-              <TouchableOpacity style={styles.roundedButton}>
-                <Text style={styles.iconButton}>
-                  <Icon name="optionsH" />
-                </Text>
-                <Text style={styles.textButton}> Update Profile</Text>
-              </TouchableOpacity>
-            </View> */}
           </ScrollView>
         </View>
       </ImageBackground>
@@ -135,23 +126,23 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: DIMENSION_HEIGHT * 0.02
     // padding: 20,
     // backgroundColor: 'rgba(26, 93, 87, 0.15)',
   },
   profilepicWrap: {
-    width: DIMENSION_WIDTH,
-    height: 350,
+    width: 280,
+    height: 280,
     // borderRadius: 100,
     // borderColor: "rgba(26, 93, 87, 0.15)",
     // borderWidth: 16,
     // marginBottom: 160,
-    elevation: 10,
   },
   profilepic: {
     flex: 1,
     width: null,
     alignSelf: "stretch",
-    // borderRadius: 100,
+    borderRadius: 700,
     // borderColor: "#fff",
     // borderWidth: 4,
   },
