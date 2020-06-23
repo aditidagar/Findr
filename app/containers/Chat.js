@@ -186,9 +186,9 @@ export default class Chat extends Component {
 class MessageBubble extends Component {
   render() {
     //These spacers make the message bubble stay to the left or the right, depending on who is speaking, even if the message is multiple lines.
-    var leftSpacer =
-      this.props.direction === 'left' ? null : <View style={{ width: 120 }} />;
     var rightSpacer =
+      this.props.direction === 'left' ? null : <View style={{ width: 120 }} />;
+    var leftSpacer =
       this.props.direction === 'left' ? <View style={{ width: 120 }} /> : null;
 
     var bubbleStyles =
