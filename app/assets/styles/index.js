@@ -248,8 +248,7 @@ export default StyleSheet.create({
   // COMPONENT - PROFILE ITEM
   containerProfileItem: {
     backgroundColor: WHITE,
-    paddingHorizontal: 10,
-    paddingBottom: 25,
+    padding: 10,
     margin: 10,
     borderRadius: 8,
     marginTop: -140,
