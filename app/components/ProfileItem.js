@@ -27,7 +27,10 @@ class ProfileItem extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      isEditable: false,
+      isEditable1: false,
+      isEditable2: false,
+      isEditable3: false,
+      isEditable4: false,
       email: "",
       password: "",
       name: "",
@@ -42,12 +45,33 @@ class ProfileItem extends React.Component{
     }
   }
 
-  handleEditClick = () => {
-    this.setState({isEditable: true});
+  //Edit/Update event handlers
+  handleEditClick1 = () => {
+    this.setState({isEditable1: true});
+  }
+  handleUpdateClick1 = () => {
+    this.setState({isEditable1: false});
   }
 
-  handleUpdateClick = () => {
-    this.setState({isEditable: false});
+  handleEditClick2 = () => {
+    this.setState({isEditable2: true});
+  }
+  handleUpdateClick2 = () => {
+    this.setState({isEditable2: false});
+  }
+
+  handleEditClick3 = () => {
+    this.setState({isEditable3: true});
+  }
+  handleUpdateClick3 = () => {
+    this.setState({isEditable3: false});
+  }
+
+  handleEditClick4 = () => {
+    this.setState({isEditable4: true});
+  }
+  handleUpdateClick4 = () => {
+    this.setState({isEditable4: false});
   }
 
   handleNameChange(text) {
@@ -84,12 +108,13 @@ class ProfileItem extends React.Component{
 
   render() {
     return (
+      <View>
       <View style={styles.containerProfileItem}>
-        {this.state.isEditable 
-          ? (<Button onPress={this.handleUpdateClick} title="Update"></Button>) 
-          : (<Button onPress={this.handleEditClick} title="Edit"></Button>)
+        {this.state.isEditable1 
+          ? (<Button onPress={this.handleUpdateClick1} title="Update"></Button>) 
+          : (<Button onPress={this.handleEditClick1} title="Edit"></Button>)
         }
-        {this.state.isEditable
+        {this.state.isEditable1
           ? (<TextInput
             underlineColor="transparent"
             mode={"flat"}
@@ -119,7 +144,7 @@ class ProfileItem extends React.Component{
           <Text style={styles.iconProfile}>
             <Icon name='circle' />
           </Text>
-          {this.state.isEditable
+          {this.state.isEditable1
           ? (<TextInput
             underlineColor="transparent"
             mode={"flat"}
@@ -143,6 +168,188 @@ class ProfileItem extends React.Component{
           <Text style={styles.infoContent}>{this.props.info3}</Text>
         </View>
       </View>
+
+      <View style={styles.containerProfileItem2}>
+      {this.state.isEditable2 
+        ? (<Button onPress={this.handleUpdateClick2} title="Update"></Button>) 
+        : (<Button onPress={this.handleEditClick2} title="Edit"></Button>)
+      }
+      <Text style={styles.name}>Education</Text>
+      {this.state.isEditable2
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.name}
+          label='Name'
+          placeholder="Enter your full name"
+          onFocus={() => this.setState({ nameLabel: "" })}
+          onBlur={() => this.setState({ nameLabel: this.state.name.length === 0 ? "Name" : "" })}
+          onChangeText={this.handleNameChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.name}>{this.props.name}</Text>)
+      }
+      <Text style={styles.descriptionProfileItem}>
+        {this.props.age} - {this.props.location}
+      </Text>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='user' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info1}</Text>
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='circle' />
+        </Text>
+        {this.state.isEditable2
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.major}
+          label='Major'
+          placeholder="Enter your major"
+          onFocus={() => this.setState({ majorLabel: "" })}
+          onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
+          onChangeText={this.handleMajorChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.infoContent}>{this.props.info2}</Text>)
+        }
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='hashtag' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info3}</Text>
+      </View>
+    </View>
+
+      <View style={styles.containerProfileItem2}>
+      {this.state.isEditable3 
+        ? (<Button onPress={this.handleUpdateClick3} title="Update"></Button>) 
+        : (<Button onPress={this.handleEditClick3} title="Edit"></Button>)
+      }
+      {this.state.isEditable3
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.name}
+          label='Name'
+          placeholder="Enter your full name"
+          onFocus={() => this.setState({ nameLabel: "" })}
+          onBlur={() => this.setState({ nameLabel: this.state.name.length === 0 ? "Name" : "" })}
+          onChangeText={this.handleNameChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.name}>{this.props.name}</Text>)
+      }
+      <Text style={styles.descriptionProfileItem}>
+        {this.props.age} - {this.props.location}
+      </Text>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='user' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info1}</Text>
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='circle' />
+        </Text>
+        {this.state.isEditable3
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.major}
+          label='Major'
+          placeholder="Enter your major"
+          onFocus={() => this.setState({ majorLabel: "" })}
+          onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
+          onChangeText={this.handleMajorChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.infoContent}>{this.props.info2}</Text>)
+        }
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='hashtag' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info3}</Text>
+      </View>
+    </View>
+
+      <View style={styles.containerProfileItem2}>
+      {this.state.isEditable4 
+        ? (<Button onPress={this.handleUpdateClick4} title="Update"></Button>) 
+        : (<Button onPress={this.handleEditClick4} title="Edit"></Button>)
+      }
+      {this.state.isEditable4
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.name}
+          label='Name'
+          placeholder="Enter your full name"
+          onFocus={() => this.setState({ nameLabel: "" })}
+          onBlur={() => this.setState({ nameLabel: this.state.name.length === 0 ? "Name" : "" })}
+          onChangeText={this.handleNameChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.name}>{this.props.name}</Text>)
+      }
+      <Text style={styles.descriptionProfileItem}>
+        {this.props.age} - {this.props.location}
+      </Text>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='user' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info1}</Text>
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='circle' />
+        </Text>
+        {this.state.isEditable4
+        ? (<TextInput
+          underlineColor="transparent"
+          mode={"flat"}
+          value={this.state.major}
+          label='Major'
+          placeholder="Enter your major"
+          onFocus={() => this.setState({ majorLabel: "" })}
+          onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
+          onChangeText={this.handleMajorChange.bind(this)}
+          theme={theme}
+          style={textBoxStyle}
+          />)
+        : (<Text style={styles.infoContent}>{this.props.info2}</Text>)
+        }
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name='hashtag' />
+        </Text>
+        <Text style={styles.infoContent}>{this.props.info3}</Text>
+      </View>
+    </View>
+    </View>
     );
   }
 }

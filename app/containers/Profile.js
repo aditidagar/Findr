@@ -86,7 +86,7 @@ class Profile extends React.Component {
                   info3={email}
                 />
               </View>
-              <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
+              {/* <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
                 <ProfileItem
                   // name={name}
                   // age={age}
@@ -94,6 +94,7 @@ class Profile extends React.Component {
                   info1={gender == "M" ? "Male" : "Female"}
                   info2={major}
                   info3={email}
+                  identifier={1}
                 />
               </View>
               <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
@@ -104,6 +105,7 @@ class Profile extends React.Component {
                   info1={gender == "M" ? "Male" : "Female"}
                   info2={major}
                   info3={email}
+                  identifier={2}
                 />
               </View>
               <View style={{marginTop: DIMENSION_HEIGHT * 0.18, marginBottom: DIMENSION_HEIGHT * 0.02}}>
@@ -116,7 +118,7 @@ class Profile extends React.Component {
                   info3={email}
                   identifier={3}
                 />
-              </View>
+              </View> */}
             </View>
           </ScrollView>
         </View>

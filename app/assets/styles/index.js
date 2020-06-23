@@ -258,6 +258,18 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     elevation: 8,
   },
+  containerProfileItem2: {
+    backgroundColor: WHITE,
+    padding: 10,
+    margin: 10,
+    borderRadius: 8,
+    marginTop: 10,
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+    elevation: 8,
+  },
   matchesProfileItem: {
     width: 131,
     marginTop: -15,
