@@ -10,10 +10,13 @@ const FULL_HEIGHT = Dimensions.get('window').height;
 const theme = {
   colors: {
       ...DefaultTheme.colors,
-      primary: "transparent",
+      primary: "black",
       text: 'black', 
       placeholder: 'darkgrey',
       labelColor: 'black',
+      // backdrop: 'white',
+      // surface: 'white',
+      backgroundColor: 'white',
   },
 };
 
@@ -211,7 +214,7 @@ class ProfileItem extends React.Component{
         style={{height: FULL_HEIGHT * 0.15}}
         placeholder="Show off your Projects here!"
         editable={this.state.isEditable3}
-        mode='outlined'
+        mode='flat'
         selectionColor="#ACCEF7"
         underlineColor="#1a5d57"
         multiline={true}
@@ -229,7 +232,7 @@ class ProfileItem extends React.Component{
         style={{height: FULL_HEIGHT * 0.15}}
         placeholder="Work or Volunteering Experience"
         editable={this.state.isEditable4}
-        mode='outlined'
+        mode='flat'
         selectionColor="#ACCEF7"
         underlineColor="#1a5d57"
         multiline={true}
