@@ -288,6 +288,13 @@ export default StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 5,
     color: TEAL,
+    fontSize: 24,
+    textAlign: "center",
+  },
+  name_secondary: {
+    paddingTop: 25,
+    paddingBottom: 5,
+    color: TEAL,
     fontSize: 15,
     textAlign: "center",
   },
@@ -317,6 +324,12 @@ export default StyleSheet.create({
     height: 60,
     alignSelf: "center",
     marginTop: DIMENSION_HEIGHT * 0.06,
+  },
+  profileTitle: {
+    fontSize: 15,
+    color: DARK_GRAY,
+    paddingHorizontal: 10,
+    // fontWeight: 'bold'
   },
 
   // CONTAINER - GENERAL
