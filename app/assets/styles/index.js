@@ -188,7 +188,7 @@ export default StyleSheet.create({
   },
 
   buttonSettings:{
-    marginLeft: DIMENSION_WIDTH * 0.8
+    marginLeft: DIMENSION_WIDTH * - 0.8
   },
   // COMPONENT - CITY
   city: {
@@ -456,23 +456,27 @@ export default StyleSheet.create({
   },
 
   LogoutSettings: {
-    left: DIMENSION_WIDTH * 0.425
+    left: DIMENSION_WIDTH * 0.425,
+    color: "black"
   },
 
   logoSettings: {
-    height: DIMENSION_HEIGHT * 0.075,
-    width: DIMENSION_WIDTH * 0.25,
-    marginLeft: DIMENSION_WIDTH * 0.4,
+    height: DIMENSION_HEIGHT * 0.07,
+    width: DIMENSION_WIDTH * 0.15,
+    marginLeft: DIMENSION_WIDTH * 0.46,
     bottom: DIMENSION_HEIGHT * 0.025,
-    marginTop: DIMENSION_HEIGHT * 0.03
+    marginTop: DIMENSION_HEIGHT * 0.03,
+    padding: 2
   },
 
   deleteAccount:{
-    marginLeft: DIMENSION_WIDTH * 0.35
+    marginLeft: DIMENSION_WIDTH * 0.35,
+    color: "black"
   },
 
   deleteAccountButton:{
-    marginBottom: DIMENSION_HEIGHT * 0.02
+    marginBottom: DIMENSION_HEIGHT * 0.02,
+    color: "black"
   },
 
   // MENU

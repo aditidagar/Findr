@@ -1,5 +1,6 @@
 import React from "react";
-import { View, ImageBackground, AsyncStorage, Image, Text, Dimensions} from "react-native";
+import { View, ImageBackground, AsyncStorage, Image, Text, Dimensions,
+TouchableOpacity} from "react-native";
 import SettingsList from 'react-native-settings-list';
 import styles from "../assets/styles";
 import {Button} from "react-native-paper"
@@ -15,7 +16,8 @@ class Settings extends React.Component{
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
             <View style={{borderBottomWidth:1, backgroundColor:'#f7f7f8',borderColor:'#c8c7cc'}}>
-              <Text style={{alignSelf:'center',top: 37,marginBottom:10,fontWeight:'bold',fontSize:20}}>Settings</Text>
+              <Text style={{alignSelf:'center',top: 37,marginBottom:10,fontWeight:'bold',fontSize:20,
+            color: "black"}}>Settings</Text>
               <Button style={styles.buttonSettings}>Done</Button>
             </View>
             <View style={{backgroundColor:'#EFEFF4',flex:1}}>
@@ -25,6 +27,7 @@ class Settings extends React.Component{
                 headerText="Contact Us"/>
                 <SettingsList.Item
                   title='Help and Support'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
 
@@ -32,10 +35,12 @@ class Settings extends React.Component{
                 headerText="Community"/>
                 <SettingsList.Item
                   title='Community Guidlines'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
                 <SettingsList.Item
                   title='Safety Tips'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
                 
@@ -43,14 +48,17 @@ class Settings extends React.Component{
                 headerText="Legal"/>
                 <SettingsList.Item
                   title='Privacy Policy'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
                 <SettingsList.Item
                   title='Terms and Services'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
                 <SettingsList.Item
                   title='Licenses'
+                  titleStyle={{color: "black"}}
                   onPress={() => {}}
                 />
 
