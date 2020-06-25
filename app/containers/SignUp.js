@@ -308,7 +308,8 @@ class SignUp extends React.Component {
               theme={theme}
               style={textBoxStyle}
             />
-            <Button mode="contained" style={styles.signupbutt}>
+            <Button mode="contained" style={styles.signupbutt}
+            onPress={()=> this.props.navigation.navigate("Settings")}>
               Sign Up
             </Button>
             <View style={styles.bottomsignup}>

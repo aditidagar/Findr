@@ -13,6 +13,7 @@ import MatchesScreen from "./containers/Matches";
 import MessagesScreen from "./containers/Messages";
 import ProfileScreen from "./containers/Profile";
 import OnboardingScreen from "./containers/Onboarding";
+import SettingsScreen from "./containers/Settings";
 
 import HomeIcon_Grey from './assets/icons/home.svg';
 import HomeIcon_Green from './assets/icons/home_g.svg';
@@ -136,7 +137,10 @@ const RootStack = createStackNavigator(
     },
     Onboarding: {
       screen: OnboardingScreen,
-    }
+    },
+    Settings: {
+      screen: SettingsScreen
+    },
   },
   { mode: "modal", headerMode: "none" }
 );
