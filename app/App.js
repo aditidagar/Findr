@@ -14,6 +14,7 @@ import MessagesScreen from "./containers/Messages";
 import ProfileScreen from "./containers/Profile";
 import Icon from "./components/Icon";
 import OnboardingScreen from "./containers/Onboarding";
+import SettingsScreen from "./containers/Settings";
 
 const App = createBottomTabNavigator(
   {
@@ -127,7 +128,10 @@ const RootStack = createStackNavigator(
     },
     Onboarding: {
       screen: OnboardingScreen,
-    }
+    },
+    Settings: {
+      screen: SettingsScreen
+    },
   },
   { mode: "modal", headerMode: "none" }
 );

@@ -187,6 +187,9 @@ export default StyleSheet.create({
     borderRadius: 20,
   },
 
+  buttonSettings:{
+    marginLeft: DIMENSION_WIDTH * 0.8
+  },
   // COMPONENT - CITY
   city: {
     backgroundColor: WHITE,
@@ -450,6 +453,26 @@ export default StyleSheet.create({
     borderRadius: 25,
     backgroundColor: SECONDARY_COLOR,
     paddingHorizontal: 20,
+  },
+
+  LogoutSettings: {
+    left: DIMENSION_WIDTH * 0.425
+  },
+
+  logoSettings: {
+    height: DIMENSION_HEIGHT * 0.075,
+    width: DIMENSION_WIDTH * 0.25,
+    marginLeft: DIMENSION_WIDTH * 0.4,
+    bottom: DIMENSION_HEIGHT * 0.025,
+    marginTop: DIMENSION_HEIGHT * 0.03
+  },
+
+  deleteAccount:{
+    marginLeft: DIMENSION_WIDTH * 0.35
+  },
+
+  deleteAccountButton:{
+    marginBottom: DIMENSION_HEIGHT * 0.02
   },
 
   // MENU
