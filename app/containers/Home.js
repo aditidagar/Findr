@@ -27,6 +27,7 @@ class Home extends React.Component {
       if (storedEmail === null) {
         this.props.navigation.navigate("LogIn");
       }
+      // this.props.navigation.navigate("Onboarding");
     } catch (err) {
       console.log(err);
     }

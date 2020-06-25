@@ -33,6 +33,19 @@ class APIConnection {
         return response;
     }
 
+    async updateUserInfo(data) {
+        const response = (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/updateUserInfo", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: data })
+        }));
+
+        return response;
+    }
+
+
     uploadPicture(url, img) {
 
         return new Promise(function(resolve, reject) {
