@@ -285,6 +285,7 @@ export default StyleSheet.create({
     color: WHITE,
   },
   name: {
+    marginLeft: DIMENSION_WIDTH * 0.15,
     paddingTop: 25,
     paddingBottom: 5,
     color: TEAL,
@@ -292,6 +293,7 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   name_secondary: {
+    marginLeft: DIMENSION_WIDTH * 0.33,
     paddingTop: 25,
     paddingBottom: 5,
     color: TEAL,
@@ -330,6 +332,27 @@ export default StyleSheet.create({
     color: DARK_GRAY,
     paddingHorizontal: 10,
     // fontWeight: 'bold'
+  },
+  profileButtons: {
+    marginLeft: DIMENSION_WIDTH * 0.13,
+    marginTop: DIMENSION_HEIGHT * 0.025,
+  },
+  profileButtons2: {
+    marginLeft: DIMENSION_WIDTH * 0.31,
+    marginTop: DIMENSION_HEIGHT * 0.025,
+  },
+  profileButtons3: {
+    marginLeft: DIMENSION_WIDTH * 0.35,
+    marginTop: DIMENSION_HEIGHT * 0.025,
+  },
+  profileButtons4: {
+    marginLeft: DIMENSION_WIDTH * 0.3,
+    marginTop: DIMENSION_HEIGHT * 0.025,
+  },
+  profileCardHeader: {
+    marginTop: -DIMENSION_HEIGHT * 0.025,
+    flexDirection: "row",
+    alignItems: 'center',
   },
 
   // CONTAINER - GENERAL

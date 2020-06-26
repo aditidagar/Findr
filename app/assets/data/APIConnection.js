@@ -1,7 +1,6 @@
 const ENDPOINT = "http://dev.findrapp.ca"; // goes to localhost from avd
 const PORT = 80;
 
-
 /**
  * This class provides methods to interact with our API. If no endpoint or port is provided,
  * it points to the API server on findr domain on port 80
@@ -42,7 +41,7 @@ class APIConnection {
             body: JSON.stringify({ user: data })
         }));
 
-        return response;
+        return response.status;
     }
 
 
@@ -78,7 +77,7 @@ class APIConnection {
      *          image: String,
      *          password: String,
      *          chats: Array<String>,
-     *          courses: Array<String>,
+     *          keywords: Array<String>,
      *          bio: String
      *      }>
      * }} An object containing the status of request and a promise which resolves to user profile if request was succesful
