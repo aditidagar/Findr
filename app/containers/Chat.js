@@ -275,7 +275,7 @@ class InputBar extends Component {
       <View style={styles.inputBar}>
         <TouchableHighlight onPress={() => this.chooseImage()}>
           <Text style={styles.iconButton2}>
-            <Icon name='heart' />
+            <Icon name='explore' />
           </Text>
         </TouchableHighlight>
         <AutogrowInput
@@ -337,12 +337,13 @@ const styles = StyleSheet.create({
   sendButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 15,
-    marginLeft: 5,
-    paddingRight: 15,
-    borderRadius: 15,
     backgroundColor: '#1a5d57',
     marginBottom: 10,
+    marginRight: 5,
+    height: 35,
+    width: 35,
+    borderRadius: 17.5,
+    marginLeft: 5,
   },
 
   //MessageBubble
@@ -384,9 +385,11 @@ const styles = StyleSheet.create({
   iconButton: { fontFamily: ICON_FONT, fontSize: 20, color: '#ffff' },
   iconButton2: {
     fontFamily: ICON_FONT,
-    fontSize: 40,
-    color: '#ffff',
+    fontSize: 30,
+    color: '#000000',
     marginBottom: 10,
+    marginLeft: 5,
+    marginRight: 5,
   },
   headerTest: {
     color: '#ffff',
