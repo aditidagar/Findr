@@ -57,6 +57,7 @@ class Profile extends React.Component {
     const gender = this.state.profile ? this.state.profile.gender : "";
     const major = this.state.profile ? this.state.profile.major : "";
     const email = this.state.profile ? this.state.profile.email : "";
+    const keywords = this.state.profile ? this.state.profile.keywords : [];
 
     return (
       <ImageBackground
@@ -80,45 +81,13 @@ class Profile extends React.Component {
                 <ProfileItem
                   name={name}
                   age={age}
-                  location={location}
-                  info1={gender == "M" ? "Male" : "Female"}
-                  info2={major}
-                  info3={email}
+                  uni={location}
+                  gender={gender == "M" ? "Male" : "Female"}
+                  major={major}
+                  email={email}
+                  keywords={keywords}
                 />
               </View>
-              {/* <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
-                <ProfileItem
-                  // name={name}
-                  // age={age}
-                  // location={location}
-                  info1={gender == "M" ? "Male" : "Female"}
-                  info2={major}
-                  info3={email}
-                  identifier={1}
-                />
-              </View>
-              <View style={{marginTop: DIMENSION_HEIGHT * 0.18}}>
-                <ProfileItem
-                  // name={name}
-                  // age={age}
-                  // location={location}
-                  info1={gender == "M" ? "Male" : "Female"}
-                  info2={major}
-                  info3={email}
-                  identifier={2}
-                />
-              </View>
-              <View style={{marginTop: DIMENSION_HEIGHT * 0.18, marginBottom: DIMENSION_HEIGHT * 0.02}}>
-                <ProfileItem
-                  // name={name}
-                  // age={age}
-                  // location={location}
-                  info1={gender == "M" ? "Male" : "Female"}
-                  info2={major}
-                  info3={email}
-                  identifier={3}
-                />
-              </View> */}
             </View>
           </ScrollView>
         </View>

@@ -44,6 +44,18 @@ class APIConnection {
         return response.status;
     }
 
+    async updateKeywords(data) {
+        const response = (await fetch(this.ENDPOINT + ":" + String(this.PORT) + "/updateKeywords", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ keywords: data.keywords, email: data.email })
+        }));
+
+        return response.status;
+    }
+
 
     uploadPicture(url, img) {
 
