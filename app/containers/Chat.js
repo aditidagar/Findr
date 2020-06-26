@@ -9,12 +9,14 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { Header, Image } from 'react-native-elements';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import AutogrowInput from 'react-native-autogrow-input';
 import Icon from '../components/Icon';
 import { moderateScale } from 'react-native-size-matters';
+import ImagePicker from 'react-native-image-picker';
 
 const DIMENSION_WIDTH = Dimensions.get('window').width;
 const DIMENSION_HEIGHT = Dimensions.get('window').height;
@@ -234,9 +236,48 @@ class InputBar extends Component {
     }
   }
 
+  chooseImage = () => {
+    let options = {
+      title: 'Select Image',
+      customButtons: [
+        { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        console.log('response', JSON.stringify(response));
+        this.setState({
+          filePath: response,
+          fileData: response.data,
+          fileUri: response.uri,
+        });
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styles.inputBar}>
+        <TouchableHighlight onPress={() => this.chooseImage()}>
+          <Text style={styles.iconButton2}>
+            <Icon name='heart' />
+          </Text>
+        </TouchableHighlight>
         <AutogrowInput
           style={styles.textBox}
           ref={(ref) => {
@@ -299,8 +340,9 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     marginLeft: 5,
     paddingRight: 15,
-    borderRadius: 5,
+    borderRadius: 15,
     backgroundColor: '#1a5d57',
+    marginBottom: 10,
   },
 
   //MessageBubble
@@ -340,6 +382,12 @@ const styles = StyleSheet.create({
     height: DIMENSION_HEIGHT,
   },
   iconButton: { fontFamily: ICON_FONT, fontSize: 20, color: '#ffff' },
+  iconButton2: {
+    fontFamily: ICON_FONT,
+    fontSize: 40,
+    color: '#ffff',
+    marginBottom: 10,
+  },
   headerTest: {
     color: '#ffff',
   },
