@@ -1,9 +1,32 @@
+
+const AWS_Presigner = require("./utils/AWSPresigner");
+
 class Message {
 	constructor(user, msg, timestamp) {
 		this.user = user;
 		this.msg = msg;
 		this.timestamp = timestamp;
+		this.media = [];
 	}
+
+	generateMediaToken () {
+		var date = new Date();
+		var token = "";
+		var mediaToken = []
+		for (var i = 0; i < this.media; i++ ){
+			token = this.user + date.getTime() + i
+			mediaToken.push(token);
+		}
+		this.media = mediaToken.splice();
+
+		var URLS = [];
+		for (var i = 0; i < this.media; i++ ){
+			var url = await AWS_Presigner.generateSignedPutUrl("chatMedia/" + this.media[i]);
+			URLS.push(url);
+		}
+		return URLS
+	}
+
 }
 
 class Chat {
@@ -22,7 +45,8 @@ class Chat {
 	}
 
 	newMessage(user, msg, timestamp) {
-		this.messages.push(new Message(user, msg, timestamp));
+		var message = new Message(user, msg, timestamp);
+		this.messages.push(message);
 	}
 }
 
