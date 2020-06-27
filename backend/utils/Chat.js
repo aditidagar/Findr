@@ -21,8 +21,8 @@ class Chat {
 		return chat;
 	}
 
-	newMessage(user, msg, timestamp) {
-		this.messages.push(new Message(user, msg, timestamp));
+	newMessage(user, msg, timestamp, media) {
+		this.messages.push(new Message(user, msg, timestamp, media));
 	}
 }
 
