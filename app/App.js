@@ -5,7 +5,7 @@ import {
   createAppContainer,
   createStackNavigator,
 } from "react-navigation";
-import styles from "./assets/styles";
+
 import SignUpScreen from "./containers/SignUp";
 import LogInScreen from "./containers/LogIn";
 import HomeScreen from "./containers/Home";

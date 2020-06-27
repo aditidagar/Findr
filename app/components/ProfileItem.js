@@ -7,23 +7,24 @@ const FULL_HEIGHT = Dimensions.get('window').height;
 import APIConnection from "../assets/data/APIConnection";
 import Pen from '../assets/icons/pen.svg';
 import Check from '../assets/icons/check.svg';
+import Tag from './Tag';
 
 const theme = {
-colors: {
-	...DefaultTheme.colors,
-	primary: "black",
-	text: 'black', 
-	placeholder: 'darkgrey',
-	labelColor: 'black',
-	backgroundColor: 'white',
-},
+	colors: {
+		...DefaultTheme.colors,
+		primary: "black",
+		text: 'black', 
+		placeholder: 'darkgrey',
+		labelColor: 'black',
+		backgroundColor: 'white',
+	},
 };
 
 const textBoxStyle = { 
-width: '75%',
-height: 50,
-alignSelf: 'center',
-backgroundColor: "transparent",
+	width: '75%',
+	height: 50,
+	alignSelf: 'center',
+	backgroundColor: "transparent",
 };
 
 class ProfileItem extends React.Component{
@@ -93,21 +94,23 @@ class ProfileItem extends React.Component{
 		const data = {
 			email: await AsyncStorage.getItem("storedEmail"),
 		};
-		if(this.state.name.length !== 0){
+		if(this.state.name.length !== 0 && this.state.name === this.props.name){
 			data.name = this.state.name
 		}
-		if(this.state.gender.length !== 0){
+		if(this.state.gender.length !== 0 && this.state.gender === this.props.gender){
 			data.gender = this.state.gender[0].toUpperCase()
 		}
-		const update = await API.updateUserInfo(data);
-		if (update == 500) {
-			console.log("Server Error");
-		}
-		if (update == 201) {
-			this.setState({
-				name: this.state.name, 
-				gender: this.state.gender[0].toUpperCase() + this.state.gender.substring(1,this.state.gender.length)
-			})
+		if(Object.keys(data).length > 1){
+			const update = await API.updateUserInfo(data);
+			if (update == 500) {
+				console.log("Server Error");
+			}
+			if (update == 201) {
+				this.setState({
+					name: this.state.name, 
+					gender: this.state.gender[0].toUpperCase() + this.state.gender.substring(1,this.state.gender.length)
+				})
+			}
 		}
 	}
 
@@ -228,16 +231,19 @@ class ProfileItem extends React.Component{
 					underlineColor="transparent"
 					mode={"flat"}
 					value={this.state.major}
-					label='Major'
-					placeholder="Enter your major"
-					onFocus={() => this.setState({ majorLabel: "" })}
-					onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
+					label='Keywords'
+					placeholder="Enter your keywords"
+					onFocus={() => this.setState({ keywordsLabel: "" })}
+					onBlur={() => this.setState({ keywordsLabel: this.state.keywords.length === 0 ? "Major" : "" })}
 					onChangeText={this.handleMajorChange.bind(this)}
 					theme={theme}
 					style={textBoxStyle}
 					/>)
 				: (<Text style={styles.infoContent}>{this.state.keywords.join(", ")}</Text>)
 				}
+				{/* <Tag 
+					keywords={this.state.keywords}
+				/> */}
 			</View>
 		</View>
 
@@ -250,32 +256,32 @@ class ProfileItem extends React.Component{
 				}
 			</View>
 			<View style={styles.info}>
-			<Text style={styles.profileTitle}>Major: </Text>
-			{this.state.isEditable2
-			? (<TextInput
-				underlineColor="transparent"
-				mode={"flat"}
-				value={this.state.major}
-				label='Major'
-				placeholder="Enter your major"
-				onFocus={() => this.setState({ majorLabel: "" })}
-				onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
-				onChangeText={this.handleMajorChange.bind(this)}
-				theme={theme}
-				style={textBoxStyle}
-				/>)
-			: (<Text style={styles.infoContent}>{this.state.major}</Text>)
-			}
+				<Text style={styles.profileTitle}>Major: </Text>
+				{this.state.isEditable2
+				? (<TextInput
+					underlineColor="transparent"
+					mode={"flat"}
+					value={this.state.major}
+					label='Major'
+					placeholder="Enter your major"
+					onFocus={() => this.setState({ majorLabel: "" })}
+					onBlur={() => this.setState({ majorLabel: this.state.major.length === 0 ? "Major" : "" })}
+					onChangeText={this.handleMajorChange.bind(this)}
+					theme={theme}
+					style={textBoxStyle}
+					/>)
+				: (<Text style={styles.infoContent}>{this.state.major}</Text>)
+				}
 			</View>
 
 			<View style={styles.info}>
-			<Text style={styles.profileTitle}>Courses: </Text>
-			<Text style={styles.infoContent}>{this.props.info1}</Text>
+				<Text style={styles.profileTitle}>Courses: </Text>
+				<Tag/>
 			</View>
 
 			<View style={styles.info}>
-			<Text style={styles.profileTitle}>Clubs: </Text>
-			<Text style={styles.infoContent}>{this.props.info3}</Text>
+				<Text style={styles.profileTitle}>Clubs: </Text>
+				<Tag/>
 			</View>
 		</View>
 
