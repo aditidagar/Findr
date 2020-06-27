@@ -6,10 +6,10 @@ class Message {
 		this.user = user;
 		this.msg = msg;
 		this.timestamp = timestamp;
-		this.media = [];
+		this.media = media;
 	}
 
-	generateMediaToken () {
+	async generateMediaTokens () {
 		var date = new Date();
 		var token = "";
 		var mediaToken = []
