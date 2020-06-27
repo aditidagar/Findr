@@ -44,9 +44,8 @@ class Chat {
 		return chat;
 	}
 
-	newMessage(user, msg, timestamp) {
-		var message = new Message(user, msg, timestamp);
-		this.messages.push(message);
+	newMessage(user, msg, timestamp, media) {
+		this.messages.push(new Message(user, msg, timestamp, media));
 	}
 }
 

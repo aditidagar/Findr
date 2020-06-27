@@ -345,7 +345,7 @@ io.on("connection", (socket) => {
 						if (chat.user1 === msg.to || chat.user2 === msg.to) {
 							chat = Chat.parseJSON(chat);
 
-							chat.newMessage(msg.from, msg.content, msg.time);
+							chat.newMessage(msg.from, msg.content, msg.time, msg.media);
 							msgHandled = true;
 
 							try {
@@ -387,7 +387,7 @@ io.on("connection", (socket) => {
 				// no existing chat b/w users, so create a new one
 				if (!msgHandled) {
 					const chat = new Chat(msg.from, msg.to);
-					chat.newMessage(msg.from, msg.content, msg.time);
+					chat.newMessage(msg.from, msg.content, msg.time, msg.media);
 
 					DB.insertChat({ chat })
 						.then((result) => {
@@ -420,7 +420,8 @@ io.on("connection", (socket) => {
 													receiver.eventQueue.enqueue(new Event(MESSAGE_EVENT, {
 														from: msg.from,
 														content: msg.content,
-														time: msg.time
+														time: msg.time,
+														media: msg.media
 													}));
 			
 													DB.updateUser({ eventQueue: receiver.eventQueue }, { email: msg.to });
