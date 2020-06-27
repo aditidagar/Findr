@@ -23,8 +23,9 @@ class Message {
 			var url = await AWS_Presigner.generateSignedPutUrl("chat_media/" + this.mediaToken[i]);
 			URLS[media[i]] = url;
 		}
+
 		this.media = mediaToken;
-		return URLS
+		return URLS;
 	}
 
 }
@@ -46,6 +47,7 @@ class Chat {
 
 	newMessage(user, msg, timestamp, media) {
 		this.messages.push(new Message(user, msg, timestamp, media));
+		return this.messages[this.messages.length - 1].generateMediaTokens();
 	}
 }
 

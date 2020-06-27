@@ -345,13 +345,15 @@ io.on("connection", (socket) => {
 						if (chat.user1 === msg.to || chat.user2 === msg.to) {
 							chat = Chat.parseJSON(chat);
 
-							chat.newMessage(msg.from, msg.content, msg.time, msg.media);
+							const mediaUploadUrls = await chat.newMessage(msg.from, msg.content, msg.time, msg.media);
 							msgHandled = true;
 
 							try {
 								await DB.updateChat(chat, {
 									_id: user.chats[i],
 								});
+
+								socket.to(msg.from).emit("upload urls", mediaUploadUrls);
 
 								if (receiverIsReachable) {
 									socket.to(msg.to).emit("new msg", msg);
@@ -387,7 +389,7 @@ io.on("connection", (socket) => {
 				// no existing chat b/w users, so create a new one
 				if (!msgHandled) {
 					const chat = new Chat(msg.from, msg.to);
-					chat.newMessage(msg.from, msg.content, msg.time, msg.media);
+					const mediaUploadUrls = await chat.newMessage(msg.from, msg.content, msg.time, msg.media);
 
 					DB.insertChat({ chat })
 						.then((result) => {
@@ -395,7 +397,7 @@ io.on("connection", (socket) => {
 							user.chats.push(result.ops[0]._id);
 							DB.updateUser({ chats: user.chats }, { email: user.email })
 								.then((value) => {
-									// socket.to(msg.to).emit("new msg", msg);
+									socket.to(msg.from).emit("upload urls", mediaUploadUrls);
 								})
 								.catch((reason) => {
 									socket.emit("send failed");
