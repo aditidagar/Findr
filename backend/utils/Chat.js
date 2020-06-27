@@ -2,7 +2,7 @@
 const AWS_Presigner = require("./utils/AWSPresigner");
 
 class Message {
-	constructor(user, msg, timestamp) {
+	constructor(user, msg, timestamp, media) {
 		this.user = user;
 		this.msg = msg;
 		this.timestamp = timestamp;
@@ -17,13 +17,13 @@ class Message {
 			token = this.user + date.getTime() + i
 			mediaToken.push(token);
 		}
-		this.media = mediaToken.splice();
 
-		var URLS = [];
+		var URLS = {};
 		for (var i = 0; i < this.media; i++ ){
-			var url = await AWS_Presigner.generateSignedPutUrl("chatMedia/" + this.media[i]);
-			URLS.push(url);
+			var url = await AWS_Presigner.generateSignedPutUrl("chat_media/" + this.mediaToken[i]);
+			URLS[media[i]] = url;
 		}
+		this.media = mediaToken;
 		return URLS
 	}
 
