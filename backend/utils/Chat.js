@@ -1,5 +1,4 @@
-
-const AWS_Presigner = require("./utils/AWSPresigner");
+const AWS_Presigner = require("./AWSPresigner");
 
 class Message {
 	constructor(user, msg, timestamp, media) {
@@ -13,15 +12,15 @@ class Message {
 		var date = new Date();
 		var token = "";
 		var mediaToken = []
-		for (var i = 0; i < this.media; i++ ){
+		for (var i = 0; i < this.media.length; i++ ){
 			token = this.user + date.getTime() + i
 			mediaToken.push(token);
 		}
 
 		var URLS = {};
-		for (var i = 0; i < this.media; i++ ){
-			var url = await AWS_Presigner.generateSignedPutUrl("chat_media/" + this.mediaToken[i]);
-			URLS[media[i]] = url;
+		for (var i = 0; i < this.media.length; i++ ){
+			var url = await AWS_Presigner.generateSignedPutUrl("chat_media/" + mediaToken[i]);
+			URLS[this.media[i]] = url;
 		}
 
 		this.media = mediaToken;
